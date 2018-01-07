@@ -2,16 +2,18 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.wangsd.web.mapper.SysMenuMapper">
 
-    <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="com.wangsd.web.model.SysMenu">
-        <id column="id" property="id" />
-        <result column="menuName" property="menuName" />
-        <result column="parentId" property="parentId" />
-        <result column="url" property="url" />
-        <result column="icon" property="icon" />
-        <result column="sort" property="sort" />
-        <result column="roleState" property="roleState" />
-        <result column="resource" property="resource" />
-    </resultMap>
+    <!-- 查询用户拥有的所有菜单 -->
+    <select id="selectMenusByUserid" resultType="com.wangsd.web.model.SysMenu">
+        SELECT DISTINCT
+            m.*
+        FROM
+            sys_user_role ur
+        LEFT JOIN sys_role_menu rm ON ur.roleId = rm.roleId
+        LEFT JOIN sys_menu m ON m.id = rm.menuId
+        WHERE
+            ur.userId = #{uid}
+        AND m.menuState = 1
+        ORDER BY m.sort
+    </select>
 
 </mapper>

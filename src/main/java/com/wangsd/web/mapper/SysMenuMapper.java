@@ -2,6 +2,9 @@ package com.wangsd.web.mapper;
 
 import com.wangsd.web.model.SysMenu;
 import com.baomidou.mybatisplus.mapper.BaseMapper;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 /**
  * <p>
@@ -13,4 +16,10 @@ import com.baomidou.mybatisplus.mapper.BaseMapper;
  */
 public interface SysMenuMapper extends BaseMapper<SysMenu> {
 
+    /**
+     * 根据用户id查询权限列表
+     * @param uid
+     * @return
+     */
+    List<SysMenu> selectMenusByUserid(@Param("uid") Long uid);
 }

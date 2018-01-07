@@ -2,6 +2,8 @@ package com.wangsd.common.shiro;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.wangsd.web.model.SysUser;
+import com.wangsd.web.service.ISysRoleMenuService;
+import com.wangsd.web.service.ISysUserRoleService;
 import com.wangsd.web.service.ISysUserService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -13,6 +15,8 @@ import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.Set;
+
 /**
  * shiro权限认证
  */
@@ -21,6 +25,10 @@ public class ShiroDbRealm extends AuthorizingRealm {
 
     @Autowired
     private ISysUserService userService;
+    @Autowired
+    ISysUserRoleService userRoleService;
+    @Autowired
+    ISysRoleMenuService roleMenuService;
 
     /**
      * Shiro权限认证
@@ -34,7 +42,7 @@ public class ShiroDbRealm extends AuthorizingRealm {
 
         SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
         authorizationInfo.setRoles(shiroUser.getRoles());
-        authorizationInfo.setStringPermissions(shiroUser.getUrlSet());
+        authorizationInfo.setStringPermissions(shiroUser.getResources());
 
         return authorizationInfo;
     }
@@ -53,13 +61,12 @@ public class ShiroDbRealm extends AuthorizingRealm {
         if (sysUser.getUserState() == 0) {
             throw new LockedAccountException();
         }
-        // 读取用户的url和角色
-//        Map<String, Set<String>> resourceMap = roleService.selectResourceMapByUserId(sysUser.getId());
-//        Set<String> urls = resourceMap.get("urls");
-//        Set<String> roles = resourceMap.get("roles");
+        // 读取用户的权限和角色
+        Set<String> resource = roleMenuService.selectResourceByUserid(sysUser.getId());
+        Set<String> roles = userRoleService.findRolesByUserid(sysUser.getId());
         ShiroUser shiroUser = new ShiroUser(sysUser.getId(), sysUser.getLoginName(), sysUser.getUserName());
-//        shiroUser.setRoles(roles);
-//        shiroUser.setUrlSet(urls);
+        shiroUser.setRoles(roles);
+        shiroUser.setResources(resource);
         // 交给AuthenticatingRealm使用CredentialsMatcher进行密码匹配
         SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(
                 shiroUser, // 用户名

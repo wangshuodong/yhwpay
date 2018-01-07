@@ -16,7 +16,7 @@ public class ShiroUser implements Serializable {
     private final String loginName;
     private String name;
     //权限列表
-    private Set<String> urlSet;
+    private Set<String> resources;
     //角色列表
     private Set<String> roles;
 
@@ -46,12 +46,16 @@ public class ShiroUser implements Serializable {
         this.name = name;
     }
 
-    public Set<String> getUrlSet() {
-        return urlSet;
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
     }
 
-    public void setUrlSet(Set<String> urlSet) {
-        this.urlSet = urlSet;
+    public Set<String> getResources() {
+        return resources;
+    }
+
+    public void setResources(Set<String> resources) {
+        this.resources = resources;
     }
 
     public Set<String> getRoles() {

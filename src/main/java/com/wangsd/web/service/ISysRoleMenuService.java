@@ -1,7 +1,9 @@
 package com.wangsd.web.service;
 
-import com.wangsd.web.model.SysRoleMenu;
 import com.baomidou.mybatisplus.service.IService;
+import com.wangsd.web.model.SysRoleMenu;
+
+import java.util.Set;
 
 /**
  * <p>
@@ -17,5 +19,13 @@ public interface ISysRoleMenuService extends IService<SysRoleMenu> {
      * 角色授权
      */
     void addAuth(Long roleId, Long[] menuIds);
+
+    /**
+     * 根据用户id查询权限列表
+     * @param uid
+     * @return
+     */
+    Set<String> selectResourceByUserid(Long uid);
+
 
 }

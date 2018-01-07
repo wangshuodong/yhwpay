@@ -1,19 +1,18 @@
 package com.wangsd.web.model;
 
-import java.io.Serializable;
-
-import java.util.Date;
-import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.activerecord.Model;
+import com.baomidou.mybatisplus.annotations.TableField;
+
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * <p>
- * 
+ * 部门表
  * </p>
  *
  * @author wangsd
- * @since 2018-01-01
+ * @since 2018-01-07
  */
 public class Department extends Model<Department> {
 

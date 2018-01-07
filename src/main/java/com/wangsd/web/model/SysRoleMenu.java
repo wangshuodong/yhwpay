@@ -1,9 +1,8 @@
 package com.wangsd.web.model;
 
-import java.io.Serializable;
-
 import com.baomidou.mybatisplus.activerecord.Model;
 import com.baomidou.mybatisplus.annotations.TableName;
+
 import java.io.Serializable;
 
 /**
@@ -12,7 +11,7 @@ import java.io.Serializable;
  * </p>
  *
  * @author wangsd
- * @since 2018-01-01
+ * @since 2018-01-07
  */
 @TableName("sys_role_menu")
 public class SysRoleMenu extends Model<SysRoleMenu> {

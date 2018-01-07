@@ -1,7 +1,9 @@
 package com.wangsd.web.service;
 
-import com.wangsd.web.model.SysUserRole;
 import com.baomidou.mybatisplus.service.IService;
+import com.wangsd.web.model.SysUserRole;
+
+import java.util.Set;
 
 /**
  * <p>
@@ -12,5 +14,10 @@ import com.baomidou.mybatisplus.service.IService;
  * @since 2018-01-01
  */
 public interface ISysUserRoleService extends IService<SysUserRole> {
-
+    /**
+     * 获取用户的角色
+     * @param uid
+     * @return
+     */
+    Set<String> findRolesByUserid(Long uid);
 }

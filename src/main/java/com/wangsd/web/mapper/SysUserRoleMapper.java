@@ -1,7 +1,10 @@
 package com.wangsd.web.mapper;
 
-import com.wangsd.web.model.SysUserRole;
 import com.baomidou.mybatisplus.mapper.BaseMapper;
+import com.wangsd.web.model.SysUserRole;
+import org.apache.ibatis.annotations.Select;
+
+import java.util.List;
 
 /**
  * <p>
@@ -13,4 +16,6 @@ import com.baomidou.mybatisplus.mapper.BaseMapper;
  */
 public interface SysUserRoleMapper extends BaseMapper<SysUserRole> {
 
+    @Select("SELECT * FROM sys_user_role ur LEFT JOIN sys_role r on ur.roleId = r.id WHERE ur.userId = #{userid}")
+    List<String> findRolesByUserid(Long userid);
 }

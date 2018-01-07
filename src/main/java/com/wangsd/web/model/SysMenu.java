@@ -1,9 +1,8 @@
 package com.wangsd.web.model;
 
-import java.io.Serializable;
-
 import com.baomidou.mybatisplus.activerecord.Model;
 import com.baomidou.mybatisplus.annotations.TableName;
+
 import java.io.Serializable;
 
 /**
@@ -12,7 +11,7 @@ import java.io.Serializable;
  * </p>
  *
  * @author wangsd
- * @since 2018-01-01
+ * @since 2018-01-07
  */
 @TableName("sys_menu")
 public class SysMenu extends Model<SysMenu> {
@@ -30,7 +29,7 @@ public class SysMenu extends Model<SysMenu> {
     /**
      * 父级菜单ID
      */
-	private String parentId;
+	private Long parentId;
     /**
      * 连接地址
      */
@@ -46,11 +45,15 @@ public class SysMenu extends Model<SysMenu> {
     /**
      * 菜单状态,1-启用,-1禁用
      */
-	private Integer roleState;
+	private Integer menuState;
     /**
      * 资源名称
      */
 	private String resource;
+    /**
+     * 深度
+     */
+	private Integer deep;
 
 
 	public Long getId() {
@@ -69,11 +72,11 @@ public class SysMenu extends Model<SysMenu> {
 		this.menuName = menuName;
 	}
 
-	public String getParentId() {
+	public Long getParentId() {
 		return parentId;
 	}
 
-	public void setParentId(String parentId) {
+	public void setParentId(Long parentId) {
 		this.parentId = parentId;
 	}
 
@@ -101,12 +104,12 @@ public class SysMenu extends Model<SysMenu> {
 		this.sort = sort;
 	}
 
-	public Integer getRoleState() {
-		return roleState;
+	public Integer getMenuState() {
+		return menuState;
 	}
 
-	public void setRoleState(Integer roleState) {
-		this.roleState = roleState;
+	public void setMenuState(Integer menuState) {
+		this.menuState = menuState;
 	}
 
 	public String getResource() {
@@ -115,6 +118,14 @@ public class SysMenu extends Model<SysMenu> {
 
 	public void setResource(String resource) {
 		this.resource = resource;
+	}
+
+	public Integer getDeep() {
+		return deep;
+	}
+
+	public void setDeep(Integer deep) {
+		this.deep = deep;
 	}
 
 	@Override
@@ -131,8 +142,9 @@ public class SysMenu extends Model<SysMenu> {
 			", url=" + url +
 			", icon=" + icon +
 			", sort=" + sort +
-			", roleState=" + roleState +
+			", menuState=" + menuState +
 			", resource=" + resource +
+			", deep=" + deep +
 			"}";
 	}
 }
