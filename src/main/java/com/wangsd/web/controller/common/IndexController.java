@@ -1,6 +1,5 @@
 package com.wangsd.web.controller.common;
 
-import com.wangsd.common.scan.Log;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class IndexController {
 
     @RequestMapping({"","/","/index"})
-    @Log("访问首页")
+    /*@Log("访问首页")*/
     public  String index(Model model){
 		return "index";
     }  

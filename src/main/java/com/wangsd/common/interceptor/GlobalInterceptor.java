@@ -44,12 +44,12 @@ public class GlobalInterceptor extends HandlerInterceptorAdapter {
 			//上级菜单id
 			String res = request.getParameter("p");
 			if (StringUtils.isNotBlank(res)) {
-				request.getSession().setAttribute("res", res);
+				request.setAttribute("res", res);
 			}
 			//当前点击菜单id
 			String cur = request.getParameter("t");
 			if (StringUtils.isNotBlank(cur)) {
-				request.getSession().setAttribute("cur", cur);
+				request.setAttribute("cur", cur);
 			}
 
 			/**

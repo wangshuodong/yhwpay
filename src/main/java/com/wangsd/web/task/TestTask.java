@@ -6,7 +6,6 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.Cache;
 import org.springframework.cache.CacheManager;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
@@ -26,7 +25,7 @@ public class TestTask {
 //	@Autowired private RedisTemplate<String, Object> redisTemplate;
 	
 	/*@Scheduled(cron = "0 5/20 * * * ?")*/
-	@Scheduled(cron = "0 0/1 * * * ?")
+	/*@Scheduled(cron = "0 0/1 * * * ?")*/
 	public void cronTest() {
 		// 测试手动存储cache
 		Cache cache = cacheManager.getCache("hour");

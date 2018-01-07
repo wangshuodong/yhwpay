@@ -1,6 +1,7 @@
 package com.wangsd.web.controller;
 
 
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.stereotype.Controller;
@@ -18,5 +19,9 @@ import com.wangsd.common.base.BaseController;
 @RequestMapping("/sysUser")
 public class SysUserController extends BaseController {
 
+    @RequestMapping("/list")
+    public String index(Model model){
+        return "users/list";
+    }
 }
 
