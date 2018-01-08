@@ -58,7 +58,7 @@
         </section>
     </div>
 
-    <div class="control-sidebar-bg"></div>
+
 </div>
 <%@ include file="/commons/importJs.jsp" %>
 <script>

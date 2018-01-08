@@ -32,9 +32,6 @@
         用户列表
     </div>
 
-
-    <%@ include file="/commons/footer.jsp" %>
-    <div class="control-sidebar-bg"></div>
 </div>
 <%@ include file="/commons/importJs.jsp" %>
 <script>
