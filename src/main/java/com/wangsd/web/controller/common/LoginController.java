@@ -70,8 +70,7 @@ public class LoginController extends BaseController {
 //        }
         Subject currentUser = SecurityUtils.getSubject();
         UsernamePasswordToken token = new UsernamePasswordToken(loginName, password);
-        //token.setRememberMe(1 == rememberMe);
-        boolean bl = currentUser.isAuthenticated();
+        token.setRememberMe(1 == rememberMe);
         if (!currentUser.isAuthenticated()) {
             try {
                 currentUser.login(token);
