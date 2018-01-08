@@ -13,7 +13,7 @@
         <!-- sidebar menu: : style can be found in sidebar.less -->
         <ul class="sidebar-menu" data-widget="tree">
             <li class="header">系统菜单</li>
-            <li class="active"><a href="${path }/index"><i class="fa fa-desktop"></i> <span>系统首页</span></a></li>
+            <li class="<c:if test="${cur == 0}">active</c:if>"><a href="${path }/index?t=0" class="myselect"><i class="fa fa-desktop"></i> <span>系统首页</span></a></li>
             <%--<li class="treeview active">
                 <a href="javascript:;">
                     <i class="fa fa-cloud"></i> <span>服务商管理</span>
@@ -95,14 +95,14 @@
                     </a>
                     <ul class="treeview-menu">
                         <c:forEach items="${ item.children }" var="sonItem">
-                            <li class="<c:if test="${cur == sonItem.id}">active</c:if>"><a href="${ sonItem.url }?p=${ item.id }&t=${ sonItem.id }">${ sonItem.menuName }</a></li>
+                            <li class="<c:if test="${cur == sonItem.id}">active</c:if>"><a href="${ sonItem.url }?p=${ item.id }&t=${ sonItem.id }"><i class="fa fa-circle-o"></i>${ sonItem.menuName }</a></li>
                         </c:forEach>
                     </ul>
                 </li>
             </c:forEach>
             <li class="header">个人中心</li>
-            <li><a href="${path }/form.jsp" class="myselect"><i class="fa fa-circle-o text-red"></i> <span>个人信息</span></a></li>
-            <li><a href="${path }/test.jsp" class="myselect"><i class="fa fa-circle-o text-yellow"></i> <span>修改密码</span></a></li>
+            <li class="<c:if test="${cur == -1}">active</c:if>"><a href="${path }/sysUser/info?t=-1" class="myselect"><i class="fa fa-circle-o text-red"></i> <span>个人信息</span></a></li>
+            <li class="<c:if test="${cur == -2}">active</c:if>"><a href="${path }/sysUser/updatePassword?t=-2" class="myselect"><i class="fa fa-circle-o text-yellow"></i> <span>修改密码</span></a></li>
         </ul>
     </section>
 </aside>

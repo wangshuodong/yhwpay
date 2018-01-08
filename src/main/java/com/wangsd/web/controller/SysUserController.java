@@ -23,5 +23,15 @@ public class SysUserController extends BaseController {
     public String index(Model model){
         return "users/list";
     }
+
+    @RequestMapping("/info")
+    public String info(Model model){
+        return "users/info";
+    }
+
+    @RequestMapping("/updatePassword")
+    public String updatePassword(Model model){
+        return "users/updatePassword";
+    }
 }
 
