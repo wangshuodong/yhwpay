@@ -1,6 +1,7 @@
 package com.wangsd.web.controller;
 
 
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.stereotype.Controller;
@@ -18,5 +19,14 @@ import com.wangsd.common.base.BaseController;
 @RequestMapping("/sysRole")
 public class SysRoleController extends BaseController {
 
+    @RequestMapping("/list")
+    public String index(Model model){
+        return "role/list";
+    }
+
+    @RequestMapping("/add")
+    public String add(Model model){
+        return "role/info";
+    }
 }
 

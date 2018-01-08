@@ -21,17 +21,17 @@ public class SysUserController extends BaseController {
 
     @RequestMapping("/list")
     public String index(Model model){
-        return "users/list";
+        return "user/list";
     }
 
     @RequestMapping("/info")
     public String info(Model model){
-        return "users/info";
+        return "user/info";
     }
 
     @RequestMapping("/updatePassword")
     public String updatePassword(Model model){
-        return "users/updatePassword";
+        return "user/updatePassword";
     }
 }
 
