@@ -1,8 +1,9 @@
 package com.wangsd.web.model;
 
+import java.io.Serializable;
+
 import com.baomidou.mybatisplus.activerecord.Model;
 import com.baomidou.mybatisplus.annotations.TableName;
-
 import java.io.Serializable;
 
 /**
@@ -11,7 +12,7 @@ import java.io.Serializable;
  * </p>
  *
  * @author wangsd
- * @since 2018-01-07
+ * @since 2018-01-09
  */
 @TableName("sys_menu")
 public class SysMenu extends Model<SysMenu> {
@@ -43,9 +44,9 @@ public class SysMenu extends Model<SysMenu> {
      */
 	private Integer sort;
     /**
-     * 菜单状态,1-启用,-1禁用
+     * 菜单状态,1启用,0禁用
      */
-	private Integer menuState;
+	private Boolean menuState;
     /**
      * 资源名称
      */
@@ -104,11 +105,11 @@ public class SysMenu extends Model<SysMenu> {
 		this.sort = sort;
 	}
 
-	public Integer getMenuState() {
+	public Boolean getMenuState() {
 		return menuState;
 	}
 
-	public void setMenuState(Integer menuState) {
+	public void setMenuState(Boolean menuState) {
 		this.menuState = menuState;
 	}
 

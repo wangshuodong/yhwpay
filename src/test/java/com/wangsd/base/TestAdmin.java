@@ -36,7 +36,7 @@ public class TestAdmin extends BaseTest {
 		//创建角色
 		SysRole sysRole = new SysRole();
 		sysRole.setRoleName("超级管理员");
-		sysRole.setRoleState(1);
+		sysRole.setRoleState(true);
 		sysRole.setCreateTime(new Date());
 		sysRoleService.insert(sysRole);
 		//查询权限
@@ -45,7 +45,7 @@ public class TestAdmin extends BaseTest {
 		sysRoleMenuService.addAuth(sysRole.getId(),list.toArray(new Long[list.size()]));
 		//添加用户
 		SysUser user = new SysUser();
-		user.setUserState(1);
+		user.setUserState(true);
 		user.setUserName("管理员");
 		user.setLoginName("admin");
 		String salt = StringUtils.getUUId();

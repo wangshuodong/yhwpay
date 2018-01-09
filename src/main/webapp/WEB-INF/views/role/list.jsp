@@ -53,13 +53,13 @@
                                        autocomplete="off" class="layui-input">
                             </div>
                             <div class="col-sm-6 col-lg-2">
-                                <button class="layui-btn layui-btn-normal">查询</button>
+                                <button class="layui-btn">查询</button>
                             </div>
                         </div>
                         <br>
                         <div class="row">
                             <div class="col-xs-12">
-                                <a class="layui-btn layui-btn-normal" id="test2">添加角色</a>
+                                <a class="layui-btn" id="test2">添加角色</a>
                             </div>
                         </div>
                     </form>
@@ -74,11 +74,8 @@
 </div>
 
 <script type="text/html" id="roleStateTpl">
-    {{#  if(d.roleState == 1){ }}
-        <input type="checkbox" checked name="open" lay-skin="switch" lay-text="启用|禁用">
-    {{#  } else { }}
-        <input type="checkbox" name="close" lay-skin="switch" lay-text="启用|禁用">
-    {{#  } }}
+        <input type="checkbox" name="roleState" value="{{String(d.id)}}" lay-skin="switch" lay-text="启用|禁用"
+               lay-filter="roleStateFilter" {{ d.roleState == 1 ? 'checked' : '' }}>
 </script>
 <script type="text/html" id="roleTypeTpl">
     {{#  if(d.roleType == 99){ }}
@@ -93,14 +90,15 @@
 </script>
 <%@ include file="/commons/importJs.jsp" %>
 <script>
-    layui.use('table', function () {
-        var table = layui.table;
-
+    layui.use(['table', 'form'], function () {
+        var table = layui.table
+        ,form = layui.form;
         table.render({
             elem: '#test'
             , url: '${staticPath}/sysRole/dataGrid'
             , cols: [[
-                {field: 'id', title: 'ID'}
+                {type:'checkbox'}
+                , {field: 'id', title: '角色名'}
                 , {field: 'roleName', title: '角色名'}
                 , {field: 'roleDesc', title: '角色描述'}
                 , {field: 'roleType', title: '角色类型', templet: '#roleTypeTpl'}
@@ -110,6 +108,29 @@
             , page: true
             , skin: 'line'
             , even: true //开启隔行背景
+        });
+        //监听锁定操作
+        form.on('switch(roleStateFilter)', function(obj){
+            var n = 948573251449737217+"";
+            alert(n+'');
+            layer.tips(this.value + ' ' + this.name + '：'+ obj.elem.checked, obj.othis);
+            $.ajax({
+                type: 'POST',
+                url: '${ path }/sysRole/updateRole',
+                dataType: 'json',
+                data:{
+                    id : this.value + '',
+                    roleState : obj.elem.checked
+                },
+                success: function(data){
+                    if (!data.success) {
+                        layer.msg(data.message);
+                    }
+                },
+                error:function(data) {
+                    console.log(data.msg);
+                },
+            });
         });
     });
 

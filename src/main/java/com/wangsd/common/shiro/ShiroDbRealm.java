@@ -58,7 +58,7 @@ public class ShiroDbRealm extends AuthorizingRealm {
             throw new UnknownAccountException();
         }
         // 账号未启用
-        if (sysUser.getUserState() == 0) {
+        if (!sysUser.getUserState()) {
             throw new LockedAccountException();
         }
         // 读取用户的权限和角色

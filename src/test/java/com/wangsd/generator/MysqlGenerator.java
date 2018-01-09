@@ -62,8 +62,11 @@ public class MysqlGenerator {
 			// 自定义数据库表字段类型转换【可选】
 			@Override
 			public DbColumnType processTypeConvert(String fieldType) {
-				System.out.println("转换类型：" + fieldType);
+				System.out.println("转换类型：" + fieldType.toLowerCase());
 				// 注意！！processTypeConvert 存在默认类型转换，如果不是你要的效果请自定义返回、非如下直接返回。
+				if (fieldType.toLowerCase().contains("tinyint")) {
+					return DbColumnType.BOOLEAN;
+				}
 				return super.processTypeConvert(fieldType);
 			}
 		});

@@ -1,10 +1,11 @@
 package com.wangsd.web.model;
 
+import java.io.Serializable;
+
+import java.util.Date;
 import com.baomidou.mybatisplus.activerecord.Model;
 import com.baomidou.mybatisplus.annotations.TableName;
-
 import java.io.Serializable;
-import java.util.Date;
 
 /**
  * <p>
@@ -12,7 +13,7 @@ import java.util.Date;
  * </p>
  *
  * @author wangsd
- * @since 2018-01-07
+ * @since 2018-01-09
  */
 @TableName("sys_user")
 public class SysUser extends Model<SysUser> {
@@ -37,9 +38,9 @@ public class SysUser extends Model<SysUser> {
 	private String password;
 	private String pwd;
     /**
-     * 用户状态,1-启用,-1禁用
+     * 用户状态,1启用,0禁用
      */
-	private Integer userState;
+	private Boolean userState;
     /**
      * 部门主键
      */
@@ -118,11 +119,11 @@ public class SysUser extends Model<SysUser> {
 		this.pwd = pwd;
 	}
 
-	public Integer getUserState() {
+	public Boolean getUserState() {
 		return userState;
 	}
 
-	public void setUserState(Integer userState) {
+	public void setUserState(Boolean userState) {
 		this.userState = userState;
 	}
 

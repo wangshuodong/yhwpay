@@ -12,7 +12,7 @@ import java.util.Date;
  * </p>
  *
  * @author wangsd
- * @since 2018-01-07
+ * @since 2018-01-09
  */
 public class Department extends Model<Department> {
 

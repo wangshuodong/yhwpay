@@ -1,10 +1,11 @@
 package com.wangsd.web.model;
 
+import java.io.Serializable;
+
+import java.util.Date;
 import com.baomidou.mybatisplus.activerecord.Model;
 import com.baomidou.mybatisplus.annotations.TableName;
-
 import java.io.Serializable;
-import java.util.Date;
 
 /**
  * <p>
@@ -12,7 +13,7 @@ import java.util.Date;
  * </p>
  *
  * @author wangsd
- * @since 2018-01-07
+ * @since 2018-01-09
  */
 @TableName("sys_role")
 public class SysRole extends Model<SysRole> {
@@ -36,9 +37,9 @@ public class SysRole extends Model<SysRole> {
      */
 	private Integer roleType;
     /**
-     * 状态,1-启用,-1禁用
+     * 状态,1启用,0禁用
      */
-	private Integer roleState;
+	private Boolean roleState;
     /**
      * 创建时间
      */
@@ -77,11 +78,11 @@ public class SysRole extends Model<SysRole> {
 		this.roleType = roleType;
 	}
 
-	public Integer getRoleState() {
+	public Boolean getRoleState() {
 		return roleState;
 	}
 
-	public void setRoleState(Integer roleState) {
+	public void setRoleState(Boolean roleState) {
 		this.roleState = roleState;
 	}
 

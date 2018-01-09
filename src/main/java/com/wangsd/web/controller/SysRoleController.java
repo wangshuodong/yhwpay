@@ -39,7 +39,9 @@ public class SysRoleController extends BaseController {
         return "role/info";
     }
 
-
+    /**
+     * 数据展示
+     */
     @RequestMapping("/dataGrid")
     @ResponseBody
     public Object dataGrid(Model model, String search){
@@ -61,5 +63,18 @@ public class SysRoleController extends BaseController {
         pageInfo.setData(pageData.getRecords());
         return pageInfo;
     }
+
+    /**
+     * 修改角色信息
+     * @param sysRole
+     * @return
+     */
+    @RequestMapping(value = "/updateRole")
+    @ResponseBody
+    public Object updateRoleState(SysRole sysRole) {
+        roleService.updateById(sysRole);
+        return renderSuccess();
+    }
+
 }
 

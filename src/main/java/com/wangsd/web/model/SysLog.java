@@ -1,11 +1,12 @@
 package com.wangsd.web.model;
 
-import com.baomidou.mybatisplus.activerecord.Model;
-import com.baomidou.mybatisplus.annotations.TableField;
-import com.baomidou.mybatisplus.annotations.TableName;
-
 import java.io.Serializable;
+
 import java.util.Date;
+import com.baomidou.mybatisplus.annotations.TableField;
+import com.baomidou.mybatisplus.activerecord.Model;
+import com.baomidou.mybatisplus.annotations.TableName;
+import java.io.Serializable;
 
 /**
  * <p>
@@ -13,7 +14,7 @@ import java.util.Date;
  * </p>
  *
  * @author wangsd
- * @since 2018-01-07
+ * @since 2018-01-09
  */
 @TableName("sys_log")
 public class SysLog extends Model<SysLog> {
