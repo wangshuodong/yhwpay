@@ -85,17 +85,6 @@
         <property name="arguments" ref="securityManager"/>
     </bean>
 
-    <!--下面的loginUrl有两个必要条件,一个登陆校验失败以后会强制客户端redirect到这个url，
-    另外一个是登陆的表单(含有用户名及密码)必须action到这个url-->
-    <!-- 自定义的能够接收校验码的身份验证过滤器
-     跳转问题太他妈诡异了,不用了，自己写代码控制如何跳转了
-    <bean id="formAuthenticationFilter" class="com.shinowit.framework.security.filter.ValidFormAuthenticationFilter">
-      <property name="usernameParam" value="loginName"/>
-      <property name="passwordParam" value="loginPass"/>
-      <property name="loginUrl" value="/login/"/>
-    </bean>
-  -->
-
     <!-- Shiro的Web过滤器 -->
     <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
         <!-- 安全管理器 -->
@@ -132,6 +121,5 @@
 
     <!-- Shiro生命周期处理器-->
     <bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>
-
 
 </beans>

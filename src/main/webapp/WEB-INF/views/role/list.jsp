@@ -33,19 +33,24 @@
                     <form class="layui-form" action="">
                         <div class="row">
                             <div class="col-sm-6 col-lg-2">
-                                <input type="text" name="title" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+                                <input type="text" name="title" required lay-verify="required" placeholder="请输入标题"
+                                       autocomplete="off" class="layui-input">
                             </div>
                             <div class="col-sm-6 col-lg-2">
-                                <input type="text" name="title" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+                                <input type="text" name="title" required lay-verify="required" placeholder="请输入标题"
+                                       autocomplete="off" class="layui-input">
                             </div>
                             <div class="col-sm-6 col-lg-2">
-                                <input type="text" name="title" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+                                <input type="text" name="title" required lay-verify="required" placeholder="请输入标题"
+                                       autocomplete="off" class="layui-input">
                             </div>
                             <div class="col-sm-6 col-lg-2">
-                                <input type="text" name="title" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+                                <input type="text" name="title" required lay-verify="required" placeholder="请输入标题"
+                                       autocomplete="off" class="layui-input">
                             </div>
                             <div class="col-sm-6 col-lg-2">
-                                <input type="text" name="title" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+                                <input type="text" name="title" required lay-verify="required" placeholder="请输入标题"
+                                       autocomplete="off" class="layui-input">
                             </div>
                             <div class="col-sm-6 col-lg-2">
                                 <button class="layui-btn layui-btn-normal">查询</button>
@@ -60,22 +65,61 @@
                     </form>
                 </div>
                 <div class="box-footer">
-                    Footer
+                    <table id="test" lay-filter="layui-hide"></table>
                 </div>
             </div>
         </section>
 
     </div>
 </div>
+
+<script type="text/html" id="roleStateTpl">
+    {{#  if(d.roleState == 1){ }}
+        <input type="checkbox" checked name="open" lay-skin="switch" lay-text="启用|禁用">
+    {{#  } else { }}
+        <input type="checkbox" name="close" lay-skin="switch" lay-text="启用|禁用">
+    {{#  } }}
+</script>
+<script type="text/html" id="roleTypeTpl">
+    {{#  if(d.roleType == 99){ }}
+        系统管理员
+    {{#  } else if(d.roleType == 1){ }}
+        服务商
+    {{#  } else if(d.roleType == 2){ }}
+        物业
+    {{#  } else if(d.roleType == 3){ }}
+        小区
+    {{#  } }}
+</script>
 <%@ include file="/commons/importJs.jsp" %>
 <script>
-    $('#test2').on('click', function(){
+    layui.use('table', function () {
+        var table = layui.table;
+
+        table.render({
+            elem: '#test'
+            , url: '${staticPath}/sysRole/dataGrid'
+            , cols: [[
+                {field: 'id', title: 'ID'}
+                , {field: 'roleName', title: '角色名'}
+                , {field: 'roleDesc', title: '角色描述'}
+                , {field: 'roleType', title: '角色类型', templet: '#roleTypeTpl'}
+                , {field: 'createTime', title: '创建时间'}
+                , {field: 'roleState', title: '角色状态', templet: '#roleStateTpl'}
+            ]]
+            , page: true
+            , skin: 'line'
+            , even: true //开启隔行背景
+        });
+    });
+
+    $('#test2').on('click', function () {
         layer.open({
             type: 2,
             title: '添加角色',
             maxmin: true,
 //            shadeClose: true, //点击遮罩关闭层
-            area : ['55%' , '70%'],
+            area: ['55%', '70%'],
             content: '${path}/sysRole/add'
         });
     });

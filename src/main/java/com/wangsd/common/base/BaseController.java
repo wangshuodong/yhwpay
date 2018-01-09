@@ -1,6 +1,5 @@
 package com.wangsd.common.base;
 
-import com.baomidou.mybatisplus.plugins.Page;
 import com.wangsd.common.entity.JSONResult;
 import com.wangsd.common.shiro.ShiroUser;
 import com.wangsd.common.utils.Charsets;
@@ -60,6 +59,7 @@ public abstract class BaseController {
 
     /**
      * 获取当前登录用户对象
+     *
      * @return {ShiroUser}
      */
     public ShiroUser getShiroUser() {
@@ -68,6 +68,7 @@ public abstract class BaseController {
 
     /**
      * 获取当前登录用户id
+     *
      * @return {Long}
      */
     public Long getUserId() {
@@ -76,6 +77,7 @@ public abstract class BaseController {
 
     /**
      * 获取当前登录用户名
+     *
      * @return {String}
      */
     public String getStaffName() {
@@ -84,6 +86,7 @@ public abstract class BaseController {
 
     /**
      * ajax失败
+     *
      * @param msg 失败的消息
      * @return {Object}
      */
@@ -92,9 +95,10 @@ public abstract class BaseController {
         result.setMessage(msg);
         return result;
     }
-    
+
     /**
      * ajax成功
+     *
      * @return {Object}
      */
     public Object renderSuccess() {
@@ -102,9 +106,10 @@ public abstract class BaseController {
         result.setSuccess(true);
         return result;
     }
-    
+
     /**
      * ajax成功
+     *
      * @param msg 消息
      * @return {Object}
      */
@@ -117,6 +122,7 @@ public abstract class BaseController {
 
     /**
      * ajax成功
+     *
      * @param obj 成功时的对象
      * @return {Object}
      */
@@ -126,51 +132,43 @@ public abstract class BaseController {
         result.setData(obj);
         return result;
     }
-    
-    public <T> Page<T> getPage(int current, int size, String sort, String order){
-        Page<T> page = new Page<T>(current, size, sort);
-        if ("desc".equals(order)) {
-            page.setAsc(false);
-        } else {
-            page.setAsc(true);
-        }
-        return page;
+
+    /**
+     * 下载文件
+     *
+     * @param file 文件
+     */
+    protected ResponseEntity<Resource> download(File file) {
+        String fileName = file.getName();
+        return download(file, fileName);
     }
-	
-	/**
-	 * 下载文件
-	 * @param file 文件
-	 */
-	protected ResponseEntity<Resource> download(File file) {
-		String fileName = file.getName();
-		return download(file, fileName);
-	}
-	
-	/**
-	 * 下载
-	 * @param file 文件
-	 * @param fileName 生成的文件名
-	 * @return {ResponseEntity}
-	 */
-	protected ResponseEntity<Resource> download(File file, String fileName) {
-		Resource resource = new FileSystemResource(file);
-		
-		HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder
-				.getRequestAttributes()).getRequest();
-		String header = request.getHeader("User-Agent");
-		// 避免空指针
-		header = header == null ? "" : header.toUpperCase();
-		HttpStatus status;
-		if (header.contains("MSIE") || header.contains("TRIDENT") || header.contains("EDGE")) {
-			fileName = URLUtils.encodeURL(fileName, Charsets.UTF_8);
-			status = HttpStatus.OK;
-		} else {
-			fileName = new String(fileName.getBytes(Charsets.UTF_8), Charsets.ISO_8859_1);
-			status = HttpStatus.CREATED;
-		}
-		HttpHeaders headers = new HttpHeaders();
-		headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
-		headers.setContentDispositionFormData("attachment", fileName);
-		return new ResponseEntity<Resource>(resource, headers, status);
-	}
+
+    /**
+     * 下载
+     *
+     * @param file     文件
+     * @param fileName 生成的文件名
+     * @return {ResponseEntity}
+     */
+    protected ResponseEntity<Resource> download(File file, String fileName) {
+        Resource resource = new FileSystemResource(file);
+
+        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder
+                .getRequestAttributes()).getRequest();
+        String header = request.getHeader("User-Agent");
+        // 避免空指针
+        header = header == null ? "" : header.toUpperCase();
+        HttpStatus status;
+        if (header.contains("MSIE") || header.contains("TRIDENT") || header.contains("EDGE")) {
+            fileName = URLUtils.encodeURL(fileName, Charsets.UTF_8);
+            status = HttpStatus.OK;
+        } else {
+            fileName = new String(fileName.getBytes(Charsets.UTF_8), Charsets.ISO_8859_1);
+            status = HttpStatus.CREATED;
+        }
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+        headers.setContentDispositionFormData("attachment", fileName);
+        return new ResponseEntity<Resource>(resource, headers, status);
+    }
 }
