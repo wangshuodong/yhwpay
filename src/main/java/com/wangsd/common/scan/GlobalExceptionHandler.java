@@ -30,8 +30,8 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(BusinessException.class)
     @ResponseBody
     public JSONResult handleBizExp(HttpServletRequest request, Exception ex) {
-        LOGGER.info("自定义业务异常：" + ex.getMessage(), ex);
-        request.getSession(true).setAttribute(EXPTION_MSG_KEY, ex.getMessage());
+        LOGGER.info("自定义业务异常：" + ex.getMessage());
+//        request.getSession(true).setAttribute(EXPTION_MSG_KEY, ex.getMessage());
         JSONResult jsonResult = new JSONResult();
         jsonResult.setMessage(ex.getMessage());
         jsonResult.setSuccess(false);

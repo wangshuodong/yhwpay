@@ -41,7 +41,7 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> impl
                 BeanUtils.copyProperties(menu, parent);
                 //子菜单
                 for (SysMenu menu2 : list) {
-                    if (menu2.getParentId() == menu.getId()) {
+                    if (menu2.getPid() == menu.getId()) {
                         TreeMenu children = new TreeMenu();
                         BeanUtils.copyProperties(menu2, children);
                         parent.getChildren().add(children);

@@ -12,7 +12,7 @@ import java.io.Serializable;
  * </p>
  *
  * @author wangsd
- * @since 2018-01-09
+ * @since 2018-01-10
  */
 @TableName("sys_menu")
 public class SysMenu extends Model<SysMenu> {
@@ -30,7 +30,7 @@ public class SysMenu extends Model<SysMenu> {
     /**
      * 父级菜单ID
      */
-	private Long parentId;
+	private Long pid;
     /**
      * 连接地址
      */
@@ -44,7 +44,7 @@ public class SysMenu extends Model<SysMenu> {
      */
 	private Integer sort;
     /**
-     * 菜单状态,1启用,0禁用
+     * 菜单状态
      */
 	private Boolean menuState;
     /**
@@ -73,12 +73,12 @@ public class SysMenu extends Model<SysMenu> {
 		this.menuName = menuName;
 	}
 
-	public Long getParentId() {
-		return parentId;
+	public Long getPid() {
+		return pid;
 	}
 
-	public void setParentId(Long parentId) {
-		this.parentId = parentId;
+	public void setPid(Long pid) {
+		this.pid = pid;
 	}
 
 	public String getUrl() {
@@ -139,7 +139,7 @@ public class SysMenu extends Model<SysMenu> {
 		return "SysMenu{" +
 			", id=" + id +
 			", menuName=" + menuName +
-			", parentId=" + parentId +
+			", pid=" + pid +
 			", url=" + url +
 			", icon=" + icon +
 			", sort=" + sort +

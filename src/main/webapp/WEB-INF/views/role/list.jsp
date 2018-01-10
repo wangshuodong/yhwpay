@@ -22,6 +22,12 @@
                 系统设置
                 <small>角色管理</small>
             </h1>
+            <%--<div class="callout callout-info">
+                <h4>
+                    系统设置
+                    <small>角色管理</small>
+                </h4>
+            </div>--%>
         </section>
 
         <section class="content">
@@ -65,7 +71,7 @@
                     </form>
                 </div>
                 <div class="box-footer">
-                    <table id="test" lay-filter="layui-hide"></table>
+                    <table id="test" lay-filter="test"></table>
                 </div>
             </div>
         </section>
@@ -74,63 +80,115 @@
 </div>
 
 <script type="text/html" id="roleStateTpl">
-        <input type="checkbox" name="roleState" value="{{String(d.id)}}" lay-skin="switch" lay-text="启用|禁用"
-               lay-filter="roleStateFilter" {{ d.roleState == 1 ? 'checked' : '' }}>
+    <input type="checkbox" name="roleState" value="{{String(d.id)}}" lay-skin="switch" lay-text="启用|禁用"
+           lay-filter="roleStateFilter" {{ d.roleState== 1 ? 'checked' : '' }}>
 </script>
+
 <script type="text/html" id="roleTypeTpl">
     {{#  if(d.roleType == 99){ }}
-        系统管理员
+    系统管理员
     {{#  } else if(d.roleType == 1){ }}
-        服务商
+    服务商
     {{#  } else if(d.roleType == 2){ }}
-        物业
+    物业
     {{#  } else if(d.roleType == 3){ }}
-        小区
+    小区
     {{#  } }}
+</script>
+
+<script type="text/html" id="barDemo">
+    <a href="javascript:;" class="layui-table-link" lay-event="edit">修改</a>
+    <a href="javascript:;" class="layui-table-link" lay-event="del">删除</a>
 </script>
 <%@ include file="/commons/importJs.jsp" %>
 <script>
     layui.use(['table', 'form'], function () {
         var table = layui.table
-        ,form = layui.form;
+            , form = layui.form;
         table.render({
             elem: '#test'
             , url: '${staticPath}/sysRole/dataGrid'
             , cols: [[
-                {type:'checkbox'}
-                , {field: 'id', title: '角色名'}
+                {type: 'checkbox'}
                 , {field: 'roleName', title: '角色名'}
                 , {field: 'roleDesc', title: '角色描述'}
                 , {field: 'roleType', title: '角色类型', templet: '#roleTypeTpl'}
                 , {field: 'createTime', title: '创建时间'}
                 , {field: 'roleState', title: '角色状态', templet: '#roleStateTpl'}
+                , {field: 'right', title: '操作', align: 'center', toolbar: '#barDemo'}
             ]]
             , page: true
             , skin: 'line'
             , even: true //开启隔行背景
         });
         //监听锁定操作
-        form.on('switch(roleStateFilter)', function(obj){
-            var n = 948573251449737217+"";
-            alert(n+'');
-            layer.tips(this.value + ' ' + this.name + '：'+ obj.elem.checked, obj.othis);
+        form.on('switch(roleStateFilter)', function (obj) {
+            //layer.tips(this.value + ' ' + this.name + '：'+ obj.elem.checked, obj.othis);
             $.ajax({
                 type: 'POST',
                 url: '${ path }/sysRole/updateRole',
                 dataType: 'json',
-                data:{
-                    id : this.value + '',
-                    roleState : obj.elem.checked
+                data: {
+                    id: this.value,
+                    roleState: obj.elem.checked
                 },
-                success: function(data){
-                    if (!data.success) {
-                        layer.msg(data.message);
+                success: function (data) {
+                    if (data.success) {
+                        layer.alert(data.message, {
+                            icon: 1,
+                            title: '成功提示'
+                        });
+                    } else {
+                        layer.alert(data.message, {
+                            icon: 2,
+                            title: '失败提示'
+                        });
                     }
                 },
-                error:function(data) {
-                    console.log(data.msg);
+                error: function (data) {
+                    layer.alert(data);
                 },
             });
+        });
+
+        //监听工具条
+        table.on('tool(test)', function (obj) {
+            var data = obj.data;
+            if (obj.event === 'del') {
+                layer.confirm('确定删除么？', function (index) {
+                    $.ajax({
+                        type: 'POST',
+                        url: '${ path }/sysRole/del',
+                        dataType: 'json',
+                        data: {
+                            id: this.value,
+                            roleState: obj.elem.checked
+                        },
+                        success: function (data) {
+                            if (data.success) {
+                                obj.del();
+                                layer.close(index);
+                            } else {
+                                layer.alert(data.message, {
+                                    icon: 2,
+                                    title: '失败提示'
+                                });
+                            }
+                        },
+                        error: function (data) {
+                            layer.alert(data);
+                        },
+                    });
+                });
+            } else if (obj.event === 'edit') {
+                layer.open({
+                    type: 2,
+                    title: '修改角色信息',
+                    maxmin: true,
+                    area: ['55%', '70%'],
+                    content: '${path}/sysRole/edit？id=' + data.id
+                });
+            }
         });
     });
 

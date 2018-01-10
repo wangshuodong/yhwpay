@@ -1,10 +1,13 @@
 package com.wangsd.web.model;
 
-import com.baomidou.mybatisplus.activerecord.Model;
-import com.baomidou.mybatisplus.annotations.TableField;
-
 import java.io.Serializable;
+
+import com.baomidou.mybatisplus.enums.IdType;
 import java.util.Date;
+import com.baomidou.mybatisplus.annotations.TableId;
+import com.baomidou.mybatisplus.annotations.TableField;
+import com.baomidou.mybatisplus.activerecord.Model;
+import java.io.Serializable;
 
 /**
  * <p>
@@ -12,7 +15,7 @@ import java.util.Date;
  * </p>
  *
  * @author wangsd
- * @since 2018-01-09
+ * @since 2018-01-10
  */
 public class Department extends Model<Department> {
 
@@ -21,6 +24,7 @@ public class Department extends Model<Department> {
     /**
      * 主键
      */
+	@TableId(value="id", type= IdType.AUTO)
 	private Long id;
     /**
      * 部门编号
@@ -33,11 +37,11 @@ public class Department extends Model<Department> {
     /**
      * 顶级服务商id
      */
-	private Integer serviceId;
+	private Boolean serviceId;
     /**
      * 直接上级id
      */
-	private Integer parentId;
+	private Boolean pid;
     /**
      * 区域
      */
@@ -84,20 +88,20 @@ public class Department extends Model<Department> {
 		this.deptName = deptName;
 	}
 
-	public Integer getServiceId() {
+	public Boolean getServiceId() {
 		return serviceId;
 	}
 
-	public void setServiceId(Integer serviceId) {
+	public void setServiceId(Boolean serviceId) {
 		this.serviceId = serviceId;
 	}
 
-	public Integer getParentId() {
-		return parentId;
+	public Boolean getPid() {
+		return pid;
 	}
 
-	public void setParentId(Integer parentId) {
-		this.parentId = parentId;
+	public void setPid(Boolean pid) {
+		this.pid = pid;
 	}
 
 	public String getRegion() {
@@ -152,7 +156,7 @@ public class Department extends Model<Department> {
 			", code=" + code +
 			", deptName=" + deptName +
 			", serviceId=" + serviceId +
-			", parentId=" + parentId +
+			", pid=" + pid +
 			", region=" + region +
 			", contactPeople=" + contactPeople +
 			", contactPhone=" + contactPhone +

@@ -2,6 +2,8 @@ package com.wangsd.web.model;
 
 import java.io.Serializable;
 
+import com.baomidou.mybatisplus.enums.IdType;
+import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.activerecord.Model;
 import com.baomidou.mybatisplus.annotations.TableName;
 import java.io.Serializable;
@@ -12,7 +14,7 @@ import java.io.Serializable;
  * </p>
  *
  * @author wangsd
- * @since 2018-01-09
+ * @since 2018-01-10
  */
 @TableName("sys_role_menu")
 public class SysRoleMenu extends Model<SysRoleMenu> {
@@ -22,6 +24,7 @@ public class SysRoleMenu extends Model<SysRoleMenu> {
     /**
      * 主键
      */
+	@TableId(value="id", type= IdType.AUTO)
 	private Long id;
     /**
      * 角色主键

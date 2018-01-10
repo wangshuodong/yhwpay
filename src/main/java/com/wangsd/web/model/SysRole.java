@@ -2,7 +2,9 @@ package com.wangsd.web.model;
 
 import java.io.Serializable;
 
+import com.baomidou.mybatisplus.enums.IdType;
 import java.util.Date;
+import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.activerecord.Model;
 import com.baomidou.mybatisplus.annotations.TableName;
 import java.io.Serializable;
@@ -13,7 +15,7 @@ import java.io.Serializable;
  * </p>
  *
  * @author wangsd
- * @since 2018-01-09
+ * @since 2018-01-10
  */
 @TableName("sys_role")
 public class SysRole extends Model<SysRole> {
@@ -23,6 +25,7 @@ public class SysRole extends Model<SysRole> {
     /**
      * 主键
      */
+	@TableId(value="id", type= IdType.AUTO)
 	private Long id;
     /**
      * 角色名称
@@ -37,7 +40,7 @@ public class SysRole extends Model<SysRole> {
      */
 	private Integer roleType;
     /**
-     * 状态,1启用,0禁用
+     * 状态
      */
 	private Boolean roleState;
     /**

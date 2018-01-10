@@ -2,7 +2,9 @@ package com.wangsd.web.model;
 
 import java.io.Serializable;
 
+import com.baomidou.mybatisplus.enums.IdType;
 import java.util.Date;
+import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.activerecord.Model;
 import com.baomidou.mybatisplus.annotations.TableName;
 import java.io.Serializable;
@@ -13,7 +15,7 @@ import java.io.Serializable;
  * </p>
  *
  * @author wangsd
- * @since 2018-01-09
+ * @since 2018-01-10
  */
 @TableName("sys_user")
 public class SysUser extends Model<SysUser> {
@@ -23,6 +25,7 @@ public class SysUser extends Model<SysUser> {
     /**
      * 主键
      */
+	@TableId(value="id", type= IdType.AUTO)
 	private Long id;
     /**
      * 用户名
@@ -38,17 +41,17 @@ public class SysUser extends Model<SysUser> {
 	private String password;
 	private String pwd;
     /**
-     * 用户状态,1启用,0禁用
+     * 用户状态
      */
 	private Boolean userState;
     /**
      * 部门主键
      */
-	private Integer parentId;
+	private Long deptId;
     /**
      * 部门code
      */
-	private String parentCode;
+	private String deptCode;
     /**
      * 电话
      */
@@ -61,10 +64,6 @@ public class SysUser extends Model<SysUser> {
      * 密码加密盐
      */
 	private String salt;
-    /**
-     * 角色ID
-     */
-	private Integer roleId;
     /**
      * 描述
      */
@@ -127,20 +126,20 @@ public class SysUser extends Model<SysUser> {
 		this.userState = userState;
 	}
 
-	public Integer getParentId() {
-		return parentId;
+	public Long getDeptId() {
+		return deptId;
 	}
 
-	public void setParentId(Integer parentId) {
-		this.parentId = parentId;
+	public void setDeptId(Long deptId) {
+		this.deptId = deptId;
 	}
 
-	public String getParentCode() {
-		return parentCode;
+	public String getDeptCode() {
+		return deptCode;
 	}
 
-	public void setParentCode(String parentCode) {
-		this.parentCode = parentCode;
+	public void setDeptCode(String deptCode) {
+		this.deptCode = deptCode;
 	}
 
 	public String getPhone() {
@@ -165,14 +164,6 @@ public class SysUser extends Model<SysUser> {
 
 	public void setSalt(String salt) {
 		this.salt = salt;
-	}
-
-	public Integer getRoleId() {
-		return roleId;
-	}
-
-	public void setRoleId(Integer roleId) {
-		this.roleId = roleId;
 	}
 
 	public String getUserDesc() {
@@ -213,12 +204,11 @@ public class SysUser extends Model<SysUser> {
 			", password=" + password +
 			", pwd=" + pwd +
 			", userState=" + userState +
-			", parentId=" + parentId +
-			", parentCode=" + parentCode +
+			", deptId=" + deptId +
+			", deptCode=" + deptCode +
 			", phone=" + phone +
 			", email=" + email +
 			", salt=" + salt +
-			", roleId=" + roleId +
 			", userDesc=" + userDesc +
 			", userImg=" + userImg +
 			", createTime=" + createTime +

@@ -70,7 +70,7 @@
 
     <!-- MP 全局配置 -->
     <bean id="globalConfig" class="com.baomidou.mybatisplus.entity.GlobalConfiguration">
-        <property name="idType" value="2"/>
+        <property name="idType" value="1"/>
         <!-- 全局表为下划线命名设置 true -->
         <!--<property name="dbColumnUnderline" value="true"/>-->
     </bean>

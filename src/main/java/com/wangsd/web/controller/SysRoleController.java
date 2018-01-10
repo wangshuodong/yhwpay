@@ -73,7 +73,7 @@ public class SysRoleController extends BaseController {
     @ResponseBody
     public Object updateRoleState(SysRole sysRole) {
         roleService.updateById(sysRole);
-        return renderSuccess();
+        return renderSuccess("修改成功");
     }
 
 }
