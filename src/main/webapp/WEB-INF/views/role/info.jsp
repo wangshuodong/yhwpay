@@ -15,43 +15,46 @@
 
 <section class="content" >
     <div class="row">
-        <div class="col-md-2">
-        </div>
         <div class="col-md-8">
-            <!-- Box Comment -->
             <div class="box box-widget">
                 <div class="box-body">
-                    <form class="form-horizontal">
+                    <form class="form-horizontal layui-form">
                         <div class="form-group">
-                            <label class="col-sm-2 control-label">Email</label>
-
+                            <label class="col-sm-2 control-label">角色名</label>
                             <div class="col-sm-10">
-                                <input type="text" name="title" required lay-verify="required" placeholder="请输入标题"
+                                <input type="text" name="title" required lay-verify="required" placeholder="请输入角色名"
                                        autocomplete="off" class="layui-input">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="inputPassword3" class="col-sm-2 control-label">Password</label>
-
+                            <label class="col-sm-2 control-label">角色描述</label>
                             <div class="col-sm-10">
-                                <input type="password" class="form-control" id="inputPassword3"
-                                       placeholder="Password">
+                                <input type="text" name="title" required lay-verify="required" placeholder="请输入角色名"
+                                       autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">角色类型</label>
+                            <div class="col-sm-10">
+                                <input type="text" name="title" required lay-verify="required" placeholder="请输入角色名"
+                                       autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">角色状态</label>
+                            <div class="col-sm-10">
+                                <input type="radio" name="sex" value="男" title="启用" checked>
+                                <input type="radio" name="sex" value="女" title="禁用" >
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="col-sm-offset-2 col-sm-10">
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox"> Remember me
-                                    </label>
-                                </div>
+                                <button class="layui-btn">保 存</button>
                             </div>
                         </div>
                     </form>
                 </div>
-                <!-- /.box-footer -->
             </div>
-            <!-- /.box -->
         </div>
     </div>
 
@@ -59,7 +62,16 @@
 
 <%@ include file="/commons/importJs.jsp" %>
 <script>
+    layui.use('form', function(){
+        var form = layui.form;
 
+        //监听提交
+        form.on('submit(formDemo)', function(data){
+            layer.msg(JSON.stringify(data.field));
+            return false;
+        });
+    });
+</script>
 </script>
 </body>
 </html>
