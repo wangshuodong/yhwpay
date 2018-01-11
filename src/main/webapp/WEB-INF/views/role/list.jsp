@@ -65,7 +65,7 @@
                         <br>
                         <div class="row">
                             <div class="col-xs-12">
-                                <a class="layui-btn" id="test2">添加角色</a>
+                                <a class="layui-btn dialog" href="javascript:;" data-url="${path}/sysRole/add" data-title="添加角色">添加角色</a>
                             </div>
                         </div>
                     </form>
@@ -101,6 +101,7 @@
     <a href="javascript:;" class="layui-table-link" lay-event="del">删除</a>
 </script>
 <%@ include file="/commons/importJs.jsp" %>
+<script src="${staticPath}/static/app/js/x-layui.js"></script>
 <script>
     layui.use(['table', 'form'], function () {
         var table = layui.table
@@ -121,7 +122,8 @@
             , skin: 'line'
             , even: true //开启隔行背景
         });
-        //监听锁定操作
+
+        //修改角色状态
         form.on('switch(roleStateFilter)', function (obj) {
             //layer.tips(this.value + ' ' + this.name + '：'+ obj.elem.checked, obj.othis);
             $.ajax({
@@ -144,25 +146,21 @@
                             title: '失败提示'
                         });
                     }
-                },
-                error: function (data) {
-                    layer.alert(data);
-                },
+                }
             });
         });
 
-        //监听工具条
+        //删除角色
         table.on('tool(test)', function (obj) {
             var data = obj.data;
             if (obj.event === 'del') {
                 layer.confirm('确定删除么？', function (index) {
                     $.ajax({
                         type: 'POST',
-                        url: '${ path }/sysRole/del',
+                        url: '${ path }/sysRole/deleteRole',
                         dataType: 'json',
                         data: {
-                            id: this.value,
-                            roleState: obj.elem.checked
+                            id: data.id
                         },
                         success: function (data) {
                             if (data.success) {
@@ -189,17 +187,6 @@
                     content: '${path}/sysRole/edit？id=' + data.id
                 });
             }
-        });
-    });
-
-    $('#test2').on('click', function () {
-        layer.open({
-            type: 2,
-            title: '添加角色',
-            maxmin: true,
-//            shadeClose: true, //点击遮罩关闭层
-            area: ['55%', '70%'],
-            content: '${path}/sysRole/add'
         });
     });
 </script>

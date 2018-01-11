@@ -14,6 +14,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.Date;
+
 /**
  * <p>
  * 角色表 前端控制器
@@ -37,6 +39,20 @@ public class SysRoleController extends BaseController {
     @RequestMapping("/add")
     public String add(Model model){
         return "role/info";
+    }
+
+    /**
+     * 新增角色
+     * @param sysRole
+     * @param model
+     * @return
+     */
+    @RequestMapping("/insertRole")
+    @ResponseBody
+    public Object insertRole(SysRole sysRole, Model model){
+        sysRole.setCreateTime(new Date());
+        roleService.insert(sysRole);
+        return renderSuccess("修改成功");
     }
 
     /**
@@ -74,6 +90,18 @@ public class SysRoleController extends BaseController {
     public Object updateRoleState(SysRole sysRole) {
         roleService.updateById(sysRole);
         return renderSuccess("修改成功");
+    }
+
+    /**
+     * 删除角色信息
+     * @param
+     * @return
+     */
+    @RequestMapping(value = "/deleteRole")
+    @ResponseBody
+    public Object deleteRole(Long id) {
+        roleService.deleteById(id);
+        return renderSuccess("删除成功");
     }
 
 }

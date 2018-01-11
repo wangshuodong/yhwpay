@@ -18,38 +18,43 @@
         <div class="col-md-8">
             <div class="box box-widget">
                 <div class="box-body">
-                    <form class="form-horizontal layui-form">
+                    <form class="form-horizontal layui-form" action="${ path }/sysRole/insertRole">
                         <div class="form-group">
                             <label class="col-sm-2 control-label">角色名</label>
                             <div class="col-sm-10">
-                                <input type="text" name="title" required lay-verify="required" placeholder="请输入角色名"
+                                <input type="text" name="roleName" lay-verify="required" placeholder="角色名"
                                        autocomplete="off" class="layui-input">
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-2 control-label">角色描述</label>
                             <div class="col-sm-10">
-                                <input type="text" name="title" required lay-verify="required" placeholder="请输入角色名"
+                                <input type="text" name="roleDesc" placeholder="角色描述"
                                        autocomplete="off" class="layui-input">
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-2 control-label">角色类型</label>
                             <div class="col-sm-10">
-                                <input type="text" name="title" required lay-verify="required" placeholder="请输入角色名"
-                                       autocomplete="off" class="layui-input">
+                                <select name="roleType" lay-verify="required">
+                                    <option value=""></option>
+                                    <option value="99">系统管理员</option>
+                                    <option value="1">服务商</option>
+                                    <option value="2">物业</option>
+                                    <option value="3">小区</option>
+                                </select>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-2 control-label">角色状态</label>
                             <div class="col-sm-10">
-                                <input type="radio" name="sex" value="男" title="启用" checked>
-                                <input type="radio" name="sex" value="女" title="禁用" >
+                                <input type="radio" name="roleState" value="1" title="启用" checked>
+                                <input type="radio" name="roleState" value="0" title="禁用" >
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="col-sm-offset-2 col-sm-10">
-                                <button class="layui-btn">保 存</button>
+                                <button class="layui-btn" lay-submit lay-filter="*">保 存</button>
                             </div>
                         </div>
                     </form>
@@ -62,16 +67,50 @@
 
 <%@ include file="/commons/importJs.jsp" %>
 <script>
-    layui.use('form', function(){
-        var form = layui.form;
-
-        //监听提交
-        form.on('submit(formDemo)', function(data){
-            layer.msg(JSON.stringify(data.field));
-            return false;
-        });
-    });
-</script>
+//    layui.use('form', function(){
+//        var form = layui.form;
+//
+//        //监听提交
+//        form.on('submit(*)', function(data){
+//            var index = layer.load(1);
+//            var values = data.field, fm = data.form;
+//            //获取checkbox选中的值
+//            var $ch = $("input:checkbox:checked");
+//            var name = {};
+//            var chvs = [];
+//            if($ch && $ch[0]){
+//                name = $ch[0].name;
+//                $ch.each(function() {
+//                    chvs.push($(this).val());
+//                });
+//                values[name] = chvs;
+//            }
+//            $.ajax({
+//                type: 'POST',
+//                url: $(fm).attr('action'),
+//                dataType: 'json',
+//                data: values,
+//                success: function (data) {
+//                    layer.close(index);
+//                    if (data.success) {
+//                        layer.alert(data.message, {
+//                            icon: 1,
+//                            title: '成功提示'
+//                        });
+//                        setTimeout(function(){
+//                            parent.location.reload();
+//                        },1000);
+//                    } else {
+//                        layer.alert(data.message, {
+//                            icon: 2,
+//                            title: '失败提示'
+//                        });
+//                    }
+//                }
+//            });
+//            return false;
+//        });
+//    });
 </script>
 </body>
 </html>
