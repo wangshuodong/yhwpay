@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.wangsd.common.base.BaseController;
 import com.wangsd.common.entity.PageInfo;
+import com.wangsd.common.entity.Rest;
 import com.wangsd.web.model.SysRole;
 import com.wangsd.web.service.ISysRoleService;
 import org.apache.commons.lang3.StringUtils;
@@ -52,7 +53,7 @@ public class SysRoleController extends BaseController {
     public Object insertRole(SysRole sysRole, Model model){
         sysRole.setCreateTime(new Date());
         roleService.insert(sysRole);
-        return renderSuccess("修改成功");
+        return Rest.ok("新增成功");
     }
 
     /**
@@ -89,7 +90,7 @@ public class SysRoleController extends BaseController {
     @ResponseBody
     public Object updateRoleState(SysRole sysRole) {
         roleService.updateById(sysRole);
-        return renderSuccess("修改成功");
+        return Rest.ok("修改成功");
     }
 
     /**
@@ -101,7 +102,26 @@ public class SysRoleController extends BaseController {
     @ResponseBody
     public Object deleteRole(Long id) {
         roleService.deleteById(id);
-        return renderSuccess("删除成功");
+        return Rest.ok("删除成功");
+    }
+
+    /**
+     * 检查角色名是否存在
+     * @param
+     * @return
+     */
+    @RequestMapping(value = "/checkRole")
+    @ResponseBody
+    public Object checkRole(String name) {
+        EntityWrapper<SysRole> ew = new EntityWrapper<SysRole>();
+        if(StringUtils.isNotBlank(name)){
+            ew.like("roleName",name);
+        }
+        SysRole sysRole = roleService.selectOne(ew);
+        if (sysRole != null) {
+            return Rest.failure("角色名称重复");
+        }
+        return Rest.ok();
     }
 
 }

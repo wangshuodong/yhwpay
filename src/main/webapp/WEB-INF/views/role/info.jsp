@@ -22,8 +22,8 @@
                         <div class="form-group">
                             <label class="col-sm-2 control-label">角色名</label>
                             <div class="col-sm-10">
-                                <input type="text" name="roleName" lay-verify="required" placeholder="角色名"
-                                       autocomplete="off" class="layui-input">
+                                <input type="text" name="roleName" lay-verify="required|check" placeholder="角色名"
+                                       autocomplete="off" class="layui-input" check-url="${ path }/sysRole/checkRole">
                             </div>
                         </div>
                         <div class="form-group">

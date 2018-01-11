@@ -1,6 +1,6 @@
 package com.wangsd.common.scan;
 
-import com.wangsd.common.entity.JSONResult;
+import com.wangsd.common.entity.Rest;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.http.HttpStatus;
@@ -29,13 +29,10 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(BusinessException.class)
     @ResponseBody
-    public JSONResult handleBizExp(HttpServletRequest request, Exception ex) {
+    public Object handleBizExp(HttpServletRequest request, Exception ex) {
         LOGGER.info("自定义业务异常：" + ex.getMessage());
 //        request.getSession(true).setAttribute(EXPTION_MSG_KEY, ex.getMessage());
-        JSONResult jsonResult = new JSONResult();
-        jsonResult.setMessage(ex.getMessage());
-        jsonResult.setSuccess(false);
-        return jsonResult;
+        return Rest.failure(ex.getMessage());
     }
 
     @ExceptionHandler(SQLException.class)
@@ -50,7 +47,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ResponseBody
-    public JSONResult processValidationError(MethodArgumentNotValidException ex) {
+    public Object processValidationError(MethodArgumentNotValidException ex) {
         LOGGER.error(ex.getMessage(), ex);
         BindingResult result = ex.getBindingResult();
         FieldError error = result.getFieldError();
@@ -60,7 +57,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(BindException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ResponseBody
-    public JSONResult processException(BindException ex) {
+    public Object processException(BindException ex) {
         LOGGER.error(ex.getMessage(), ex);
         FieldError error = ex.getFieldError();
         return getFieldErrorResult(error);
@@ -72,16 +69,14 @@ public class GlobalExceptionHandler {
      * @param error
      * @return
      */
-    private JSONResult getFieldErrorResult(FieldError error) {
+    private Object getFieldErrorResult(FieldError error) {
         StringBuilder errorMsg = new StringBuilder(100);
         errorMsg.append("$(form).find(\"[name=\\\"");
         errorMsg.append(error.getField());
         errorMsg.append("\\\"]\").closest(\"td\").prev().text() + \"，");
         errorMsg.append(error.getDefaultMessage());
         errorMsg.append("\"");
-        JSONResult _result = new JSONResult();
-        _result.setMessage(errorMsg.toString());
-        return _result;
+        return Rest.failure(errorMsg.toString());
     }
 
 }

@@ -71,7 +71,7 @@
                     </form>
                 </div>
                 <div class="box-footer">
-                    <table id="test" lay-filter="test"></table>
+                    <table id="table" lay-filter="table"></table>
                 </div>
             </div>
         </section>
@@ -107,7 +107,7 @@
         var table = layui.table
             , form = layui.form;
         table.render({
-            elem: '#test'
+            elem: '#table'
             , url: '${staticPath}/sysRole/dataGrid'
             , cols: [[
                 {type: 'checkbox'}
@@ -135,13 +135,13 @@
                     roleState: obj.elem.checked
                 },
                 success: function (data) {
-                    if (data.success) {
-                        layer.alert(data.message, {
+                    if (data.code == 200) {
+                        layer.alert(data.msg, {
                             icon: 1,
                             title: '成功提示'
                         });
                     } else {
-                        layer.alert(data.message, {
+                        layer.alert(data.msg, {
                             icon: 2,
                             title: '失败提示'
                         });
@@ -151,7 +151,7 @@
         });
 
         //删除角色
-        table.on('tool(test)', function (obj) {
+        table.on('tool(table)', function (obj) {
             var data = obj.data;
             if (obj.event === 'del') {
                 layer.confirm('确定删除么？', function (index) {
@@ -163,18 +163,18 @@
                             id: data.id
                         },
                         success: function (data) {
-                            if (data.success) {
+                            if (data.code == 200) {
                                 obj.del();
                                 layer.close(index);
                             } else {
-                                layer.alert(data.message, {
+                                layer.alert(data.msg, {
                                     icon: 2,
                                     title: '失败提示'
                                 });
                             }
                         },
                         error: function (data) {
-                            layer.alert(data);
+//                            layer.alert(data);
                         },
                     });
                 });

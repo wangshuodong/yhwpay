@@ -1,6 +1,5 @@
 package com.wangsd.common.base;
 
-import com.wangsd.common.entity.JSONResult;
 import com.wangsd.common.shiro.ShiroUser;
 import com.wangsd.common.utils.Charsets;
 import com.wangsd.common.utils.URLUtils;
@@ -82,55 +81,6 @@ public abstract class BaseController {
      */
     public String getStaffName() {
         return this.getShiroUser().getName();
-    }
-
-    /**
-     * ajax失败
-     *
-     * @param msg 失败的消息
-     * @return {Object}
-     */
-    public Object renderError(String msg) {
-        JSONResult result = new JSONResult();
-        result.setMessage(msg);
-        return result;
-    }
-
-    /**
-     * ajax成功
-     *
-     * @return {Object}
-     */
-    public Object renderSuccess() {
-        JSONResult result = new JSONResult();
-        result.setSuccess(true);
-        return result;
-    }
-
-    /**
-     * ajax成功
-     *
-     * @param msg 消息
-     * @return {Object}
-     */
-    public Object renderSuccess(String msg) {
-        JSONResult result = new JSONResult();
-        result.setSuccess(true);
-        result.setMessage(msg);
-        return result;
-    }
-
-    /**
-     * ajax成功
-     *
-     * @param obj 成功时的对象
-     * @return {Object}
-     */
-    public Object renderSuccess(Object obj) {
-        JSONResult result = new JSONResult();
-        result.setSuccess(true);
-        result.setData(obj);
-        return result;
     }
 
     /**

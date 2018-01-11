@@ -1,6 +1,6 @@
 package com.wangsd.common.scan;
 
-import com.wangsd.common.entity.JSONResult;
+import com.wangsd.common.entity.Rest;
 import com.wangsd.common.utils.BeanUtils;
 import com.wangsd.common.utils.WebUtils;
 import org.apache.logging.log4j.LogManager;
@@ -37,12 +37,10 @@ public class ExceptionResolver implements HandlerExceptionResolver {
 		HandlerMethod handlerMethod = (HandlerMethod) handler;
 
 		if (WebUtils.isAjax(handlerMethod)) {
-			JSONResult result = new JSONResult();
-			result.setMessage(e.getMessage());
 			MappingJackson2JsonView view = new MappingJackson2JsonView();
 			view.setObjectMapper(jacksonObjectMapper);
 			view.setContentType("text/html;charset=UTF-8");
-			return new ModelAndView(view, BeanUtils.toMap(result));
+			return new ModelAndView(view, BeanUtils.toMap(Rest.failure(e.getMessage())));
 		}
 
 		// 页面指定状态为500，便于上层的resion或者nginx的500页面跳转，由于error/500不适合对用户展示

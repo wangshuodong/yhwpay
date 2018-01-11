@@ -1,11 +1,11 @@
 //layui xtable
-layui.define(['layer','table','element','form'], function(exports){
+layui.define(['table','element','form'], function(exports){
 	
 	var $ = layui.jquery,
 		element = layui.element,
 		form = layui.form,
 		table = layui.table;
-	
+
 	//弹窗
 	$(".dialog").on('click',function(){
 		var me = this;
@@ -15,7 +15,7 @@ layui.define(['layer','table','element','form'], function(exports){
 		 title = $(me).attr('data-title') || '';
 		 x_admin_show(title,url,width,height);
 	});
-	
+
 	//监听table的工具条
 	 table.on('tool(table)', function(obj){
 		var me = this;
