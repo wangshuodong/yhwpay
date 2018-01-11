@@ -36,36 +36,22 @@
                     <h3 class="box-title">角色列表</h3>
                 </div>
                 <div class="box-body">
-                    <form class="layui-form" action="">
+                    <form class="layui-form">
                         <div class="row">
                             <div class="col-sm-6 col-lg-2">
-                                <input type="text" name="title" required lay-verify="required" placeholder="请输入标题"
+                                <input type="text" name="search" placeholder="请输入角色名称"
                                        autocomplete="off" class="layui-input">
                             </div>
                             <div class="col-sm-6 col-lg-2">
-                                <input type="text" name="title" required lay-verify="required" placeholder="请输入标题"
-                                       autocomplete="off" class="layui-input">
-                            </div>
-                            <div class="col-sm-6 col-lg-2">
-                                <input type="text" name="title" required lay-verify="required" placeholder="请输入标题"
-                                       autocomplete="off" class="layui-input">
-                            </div>
-                            <div class="col-sm-6 col-lg-2">
-                                <input type="text" name="title" required lay-verify="required" placeholder="请输入标题"
-                                       autocomplete="off" class="layui-input">
-                            </div>
-                            <div class="col-sm-6 col-lg-2">
-                                <input type="text" name="title" required lay-verify="required" placeholder="请输入标题"
-                                       autocomplete="off" class="layui-input">
-                            </div>
-                            <div class="col-sm-6 col-lg-2">
-                                <button class="layui-btn">查询</button>
+                                <button class="layui-btn" lay-submit lay-filter="search">查 询</button>
+                                <button class="layui-btn" lay-submit lay-filter="search"><i class="layui-icon layui-anim layui-anim-rotate layui-anim-loop" style="font-size: 30px;">&#x1002;</i></button>
                             </div>
                         </div>
                         <br>
                         <div class="row">
                             <div class="col-xs-12">
-                                <a class="layui-btn dialog" href="javascript:;" data-url="${path}/sysRole/add" data-title="添加角色">添加角色</a>
+                                <a class="layui-btn dialog" data-url="${path}/sysRole/add" data-title="添加角色">添加角色</a>
+                                <a class="layui-btn layui-btn-danger del-all" data-url="${path}/sysRole/deleteAll" data-title="添加角色">批量删除</a>
                             </div>
                         </div>
                     </form>
@@ -97,11 +83,12 @@
 </script>
 
 <script type="text/html" id="barDemo">
-    <a href="javascript:;" class="layui-table-link" lay-event="edit">修改</a>
-    <a href="javascript:;" class="layui-table-link" lay-event="del">删除</a>
+    <a href="javascript:;" class="layui-table-link" lay-event="edit" data-url="${ path }/sysRole/edit" data-title="修改角色">修改</a>
+    <a href="javascript:;" class="layui-table-link" lay-event="del" data-url="${ path }/sysRole/deleteRole">删除</a>
 </script>
 <%@ include file="/commons/importJs.jsp" %>
 <script src="${staticPath}/static/app/js/x-layui.js"></script>
+<script src="${staticPath}/static/app/js/xtable.js"></script>
 <script>
     layui.use(['table', 'form'], function () {
         var table = layui.table
@@ -150,44 +137,6 @@
             });
         });
 
-        //删除角色
-        table.on('tool(table)', function (obj) {
-            var data = obj.data;
-            if (obj.event === 'del') {
-                layer.confirm('确定删除么？', function (index) {
-                    $.ajax({
-                        type: 'POST',
-                        url: '${ path }/sysRole/deleteRole',
-                        dataType: 'json',
-                        data: {
-                            id: data.id
-                        },
-                        success: function (data) {
-                            if (data.code == 200) {
-                                obj.del();
-                                layer.close(index);
-                            } else {
-                                layer.alert(data.msg, {
-                                    icon: 2,
-                                    title: '失败提示'
-                                });
-                            }
-                        },
-                        error: function (data) {
-//                            layer.alert(data);
-                        },
-                    });
-                });
-            } else if (obj.event === 'edit') {
-                layer.open({
-                    type: 2,
-                    title: '修改角色信息',
-                    maxmin: true,
-                    area: ['55%', '70%'],
-                    content: '${path}/sysRole/edit？id=' + data.id
-                });
-            }
-        });
     });
 </script>
 </body>

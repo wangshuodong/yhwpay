@@ -15,21 +15,22 @@
 
 <section class="content" >
     <div class="row">
-        <div class="col-md-8">
+        <div class="col-md-12">
             <div class="box box-widget">
                 <div class="box-body">
-                    <form class="form-horizontal layui-form" action="${ path }/sysRole/insertRole">
+                    <form class="form-horizontal layui-form" action="${ path }/sysRole/updateRole">
+                        <input type="hidden" name="id" value="${sysRole.id}">
                         <div class="form-group">
                             <label class="col-sm-2 control-label">角色名</label>
                             <div class="col-sm-10">
-                                <input type="text" name="roleName" lay-verify="required|check" placeholder="角色名"
-                                       autocomplete="off" class="layui-input" check-url="${ path }/sysRole/checkRole">
+                                <input type="text" name="roleName" value="${sysRole.roleName}" lay-verify="required|check" placeholder="角色名"
+                                       autocomplete="off" class="layui-input">
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-2 control-label">角色描述</label>
                             <div class="col-sm-10">
-                                <input type="text" name="roleDesc" placeholder="角色描述"
+                                <input type="text" name="roleDesc" value="${sysRole.roleDesc}" placeholder="角色描述"
                                        autocomplete="off" class="layui-input">
                             </div>
                         </div>
@@ -38,23 +39,24 @@
                             <div class="col-sm-10">
                                 <select name="roleType" lay-verify="required">
                                     <option value=""></option>
-                                    <option value="99">系统管理员</option>
-                                    <option value="1">服务商</option>
-                                    <option value="2">物业</option>
-                                    <option value="3">小区</option>
+                                    <option value="99" <c:if test="${sysRole.roleType == 99}">selected</c:if>>系统管理员</option>
+                                    <option value="1" <c:if test="${sysRole.roleType == 1}">selected</c:if>>服务商</option>
+                                    <option value="2" <c:if test="${sysRole.roleType == 2}">selected</c:if>>物业</option>
+                                    <option value="3" <c:if test="${sysRole.roleType == 3}">selected</c:if>>小区</option>
                                 </select>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-2 control-label">角色状态</label>
                             <div class="col-sm-10">
-                                <input type="radio" name="roleState" value="1" title="启用" checked>
-                                <input type="radio" name="roleState" value="0" title="禁用" >
+                                <input type="radio" name="roleState" value="1" title="启用" <c:if test="${sysRole.roleState == true}">checked</c:if>>
+                                <input type="radio" name="roleState" value="0" title="禁用" <c:if test="${sysRole.roleState == false}">checked</c:if>>
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="col-sm-offset-2 col-sm-10">
-                                <button class="layui-btn" lay-submit lay-filter="*">保 存</button>
+                                <button class="layui-btn" lay-submit lay-filter="save">保 存</button>
+                                <a class="layui-btn btn-default" href="javascript:parent.layer.closeAll('iframe');">取 消</a>
                             </div>
                         </div>
                     </form>

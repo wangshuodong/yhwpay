@@ -88,7 +88,7 @@ layui.define(['form', 'upload'], function (exports) {
     });
 
     //监听提交
-    form.on('submit(*)', function (data) {
+    form.on('submit(save)', function (data) {
         var index = layer.load(1);
         var values = data.field, fm = data.form;
         //获取checkbox选中的值

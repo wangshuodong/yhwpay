@@ -40,6 +40,9 @@ public class ExceptionResolver implements HandlerExceptionResolver {
 			MappingJackson2JsonView view = new MappingJackson2JsonView();
 			view.setObjectMapper(jacksonObjectMapper);
 			view.setContentType("text/html;charset=UTF-8");
+			if (e.getMessage() == null) {
+				return new ModelAndView(view, BeanUtils.toMap(Rest.failure("出现异常请联系管理员")));
+			}
 			return new ModelAndView(view, BeanUtils.toMap(Rest.failure(e.getMessage())));
 		}
 

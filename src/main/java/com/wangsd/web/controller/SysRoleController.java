@@ -15,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.Arrays;
 import java.util.Date;
 
 /**
@@ -39,7 +40,14 @@ public class SysRoleController extends BaseController {
 
     @RequestMapping("/add")
     public String add(Model model){
-        return "role/info";
+        return "role/add";
+    }
+
+    @RequestMapping("/edit")
+    public String edit(Long id, Model model){
+        SysRole sysRole = roleService.selectById(id);
+        model.addAttribute("sysRole", sysRole);
+        return "role/edit";
     }
 
     /**
@@ -101,8 +109,23 @@ public class SysRoleController extends BaseController {
     @RequestMapping(value = "/deleteRole")
     @ResponseBody
     public Object deleteRole(Long id) {
+        if (true) {
+            throw new RuntimeException();
+        }
         roleService.deleteById(id);
         return Rest.ok("删除成功");
+    }
+
+    /**
+     * 批量删除
+     * @param ids
+     * @return
+     */
+    @RequestMapping("/deleteAll")
+    @ResponseBody
+    public Rest deleteAll(Long[] ids){
+        roleService.deleteBatchIds(Arrays.asList(ids));
+        return Rest.ok();
     }
 
     /**
@@ -115,7 +138,7 @@ public class SysRoleController extends BaseController {
     public Object checkRole(String name) {
         EntityWrapper<SysRole> ew = new EntityWrapper<SysRole>();
         if(StringUtils.isNotBlank(name)){
-            ew.like("roleName",name);
+            ew.eq("roleName",name);
         }
         SysRole sysRole = roleService.selectOne(ew);
         if (sysRole != null) {

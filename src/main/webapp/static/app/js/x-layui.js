@@ -15,10 +15,10 @@ function x_admin_show(title,url,w,h){
 		url="404.html";
 	};
 	if (w == null || w == '') {
-		w='800px';
+		w='55%';
 	};
 	if (h == null || h == '') {
-		h='600px';
+		h='70%';
 	};
 	layer.open({
 		type: 2,
