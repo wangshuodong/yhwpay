@@ -1,10 +1,9 @@
 package com.wangsd.web.controller;
 
 
-import org.springframework.web.bind.annotation.RequestMapping;
-
-import org.springframework.stereotype.Controller;
 import com.wangsd.common.base.BaseController;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  * <p>

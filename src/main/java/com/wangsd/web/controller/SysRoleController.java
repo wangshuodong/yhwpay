@@ -7,7 +7,10 @@ import com.wangsd.common.base.BaseController;
 import com.wangsd.common.entity.PageInfo;
 import com.wangsd.common.entity.Rest;
 import com.wangsd.common.scan.Log;
+import com.wangsd.common.shiro.ShiroUser;
 import com.wangsd.web.model.SysRole;
+import com.wangsd.web.model.custom.TreeMenu;
+import com.wangsd.web.service.ISysMenuService;
 import com.wangsd.web.service.ISysRoleService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 
 /**
  * <p>
@@ -33,6 +37,8 @@ public class SysRoleController extends BaseController {
 
     @Autowired
     ISysRoleService roleService;
+    @Autowired
+    ISysMenuService menuService;
 
     @RequestMapping("/list")
     public String index(Model model){
@@ -53,6 +59,13 @@ public class SysRoleController extends BaseController {
 
     @RequestMapping("/auth")
     public String auth(Model model){
+        ShiroUser loginUser = this.getShiroUser();
+        Long userId = null;
+        if (!"admin".equals(loginUser.getLoginName())) {
+            userId = loginUser.getId();
+        }
+        List<TreeMenu> list = menuService.selectAllTreeMenuByUserId(userId);
+        model.addAttribute("TreeMenu", list);
         return "role/auth";
     }
 

@@ -7,10 +7,3 @@
     margin-left: 5px;
     margin-top: 5px;
 }
-
-.has-feedback .form-control{
-    height: 50px;
-}
-.form-control-feedback {
-    top: 8px 0px;
-}

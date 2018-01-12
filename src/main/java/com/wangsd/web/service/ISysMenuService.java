@@ -17,7 +17,13 @@ import java.util.List;
 public interface ISysMenuService extends IService<SysMenu> {
 
     /**
-     * 获取当前用户的菜单
+     * 查询左侧菜单列表（1、2级）
      */
     List<TreeMenu> selectTreeMenuByUserId(Long uid);
+
+    /**
+     * 获取当前用户的所有菜单（1、2、3级）
+     * 不传入uid就查询所有菜单
+     */
+    List<TreeMenu> selectAllTreeMenuByUserId(Long uid);
 }

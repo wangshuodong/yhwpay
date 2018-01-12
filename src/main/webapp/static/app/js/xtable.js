@@ -54,7 +54,6 @@ layui.define(['table', 'element', 'form'], function (exports) {
         var url = $(this).attr('data-url');
         var checkStatus = table.checkStatus('table');
         var data = checkStatus.data;
-        layer.alert(JSON.stringify(data));
         if (data.length == 0) {
             layer.msg("请选择要删除的记录");
             return;

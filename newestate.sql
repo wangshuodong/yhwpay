@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50709
 File Encoding         : 65001
 
-Date: 2018-01-10 17:56:11
+Date: 2018-01-12 18:04:14
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -50,7 +50,7 @@ CREATE TABLE `sys_log` (
   `client_ip` varchar(255) DEFAULT NULL COMMENT '客户端ip',
   `createTime` datetime DEFAULT NULL COMMENT '日志时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COMMENT='日志表';
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8 COMMENT='日志表';
 
 -- ----------------------------
 -- Records of sys_log
@@ -59,6 +59,21 @@ INSERT INTO `sys_log` VALUES ('1', 'admin', '用户登录成功', '/doLogin', '{
 INSERT INTO `sys_log` VALUES ('2', 'admin', '用户登录成功', '/doLogin', '{\"loginName\":[\"admin\"],\"password\":[\"123456\"]}', '0:0:0:0:0:0:0:1', '2018-01-10 11:44:05');
 INSERT INTO `sys_log` VALUES ('3', 'admin', '用户登录成功', '/doLogin', '{\"loginName\":[\"admin\"],\"password\":[\"123456\"],\"rememberMe\":[\"1\"]}', '0:0:0:0:0:0:0:1', '2018-01-10 13:55:13');
 INSERT INTO `sys_log` VALUES ('4', 'admin', '用户登录成功', '/doLogin', '{\"loginName\":[\"admin\"],\"password\":[\"123456\"]}', '0:0:0:0:0:0:0:1', '2018-01-10 15:38:25');
+INSERT INTO `sys_log` VALUES ('5', 'admin', '用户登录成功', '/doLogin', '{\"loginName\":[\"admin\"],\"password\":[\"123456\"],\"rememberMe\":[\"1\"]}', '0:0:0:0:0:0:0:1', '2018-01-11 11:28:06');
+INSERT INTO `sys_log` VALUES ('6', 'admin', '用户登录成功', '/doLogin', '{\"loginName\":[\"admin\"],\"password\":[\"123456\"]}', '0:0:0:0:0:0:0:1', '2018-01-11 13:48:56');
+INSERT INTO `sys_log` VALUES ('7', 'admin', '用户登录成功', '/doLogin', '{\"loginName\":[\"admin\"],\"password\":[\"123456\"]}', '0:0:0:0:0:0:0:1', '2018-01-11 14:45:31');
+INSERT INTO `sys_log` VALUES ('8', 'admin', '用户登录成功', '/doLogin', '{\"loginName\":[\"admin\"],\"password\":[\"123456\"]}', '0:0:0:0:0:0:0:1', '2018-01-11 17:30:33');
+INSERT INTO `sys_log` VALUES ('9', 'admin', '用户登录成功', '/doLogin', '{\"loginName\":[\"admin\"],\"password\":[\"123456\"]}', '0:0:0:0:0:0:0:1', '2018-01-12 10:31:21');
+INSERT INTO `sys_log` VALUES ('10', 'admin', '用户登录成功', '/doLogin', '{\"loginName\":[\"admin\"],\"password\":[\"123456\"]}', '0:0:0:0:0:0:0:1', '2018-01-12 13:30:42');
+INSERT INTO `sys_log` VALUES ('11', 'admin', '用户登录成功', '/doLogin', '{\"loginName\":[\"admin\"],\"password\":[\"123456\"]}', '0:0:0:0:0:0:0:1', '2018-01-12 14:15:42');
+INSERT INTO `sys_log` VALUES ('12', 'admin', '新增角色', '/sysRole/insertRole', '{\"roleName\":[\"124\"],\"roleDesc\":[\"\"],\"roleType\":[\"1\"],\"roleState\":[\"1\"]}', '0:0:0:0:0:0:0:1', '2018-01-12 14:16:14');
+INSERT INTO `sys_log` VALUES ('13', 'admin', '新增角色', '/sysRole/insertRole', '{\"roleName\":[\"124\"],\"roleDesc\":[\"\"],\"roleType\":[\"2\"],\"roleState\":[\"1\"]}', '0:0:0:0:0:0:0:1', '2018-01-12 14:22:39');
+INSERT INTO `sys_log` VALUES ('14', 'admin', '新增角色', '/sysRole/insertRole', '{\"roleName\":[\"124\"],\"roleDesc\":[\"\"],\"roleType\":[\"\"],\"roleState\":[\"1\"]}', '0:0:0:0:0:0:0:1', '2018-01-12 14:23:48');
+INSERT INTO `sys_log` VALUES ('15', 'admin', '批量删除角色', '/sysRole/deleteAll', '{\"ids\":[\"31\",\"30\",\"29\"]}', '0:0:0:0:0:0:0:1', '2018-01-12 14:33:00');
+INSERT INTO `sys_log` VALUES ('16', 'admin', '用户登录成功', '/doLogin', '{\"loginName\":[\"admin\"],\"password\":[\"123456\"]}', '0:0:0:0:0:0:0:1', '2018-01-12 15:10:20');
+INSERT INTO `sys_log` VALUES ('17', 'admin', '用户登录成功', '/doLogin', '{\"loginName\":[\"admin\"],\"password\":[\"123456\"]}', '0:0:0:0:0:0:0:1', '2018-01-12 16:13:06');
+INSERT INTO `sys_log` VALUES ('18', 'admin', '批量删除角色', '/sysRole/deleteAll', '{\"ids\":[\"28\",\"26\",\"25\",\"21\",\"20\",\"18\",\"17\",\"16\",\"15\",\"14\"]}', '0:0:0:0:0:0:0:1', '2018-01-12 16:13:22');
+INSERT INTO `sys_log` VALUES ('19', 'admin', '批量删除角色', '/sysRole/deleteAll', '{\"ids\":[\"13\",\"12\",\"11\",\"10\",\"9\",\"8\",\"7\",\"4\",\"2\"]}', '0:0:0:0:0:0:0:1', '2018-01-12 16:14:42');
 
 -- ----------------------------
 -- Table structure for sys_menu
@@ -96,6 +111,12 @@ INSERT INTO `sys_menu` VALUES ('403', '交易中心', '4', null, null, '7', '1',
 INSERT INTO `sys_menu` VALUES ('501', '用户中心', '5', '/sysUser/list', null, '8', '1', null, '2');
 INSERT INTO `sys_menu` VALUES ('601', '角色管理', '6', '/sysRole/list', null, '9', '1', null, '2');
 INSERT INTO `sys_menu` VALUES ('602', '费用类型', '6', null, null, '10', '1', null, '2');
+INSERT INTO `sys_menu` VALUES ('603', '菜单管理', '6', '/sysMenu/list', null, '11', '1', null, '2');
+INSERT INTO `sys_menu` VALUES ('6001', '添加角色', '601', null, null, '1', '1', 'insertRole', '3');
+INSERT INTO `sys_menu` VALUES ('6002', '批量删除', '601', null, null, '2', '1', 'deleteAll', '3');
+INSERT INTO `sys_menu` VALUES ('6003', '授权', '601', null, null, '3', '1', 'addAuth', '3');
+INSERT INTO `sys_menu` VALUES ('6004', '修改', '601', null, null, '4', '1', 'updateRole', '3');
+INSERT INTO `sys_menu` VALUES ('6005', '删除', '601', null, null, '5', '1', 'deleteRole', '3');
 
 -- ----------------------------
 -- Table structure for sys_role
@@ -109,7 +130,7 @@ CREATE TABLE `sys_role` (
   `roleState` tinyint(1) DEFAULT '1' COMMENT '状态',
   `createTime` datetime DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='角色表';
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8 COMMENT='角色表';
 
 -- ----------------------------
 -- Records of sys_role
