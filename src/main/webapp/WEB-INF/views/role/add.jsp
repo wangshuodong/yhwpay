@@ -23,7 +23,7 @@
                             <label class="col-sm-2 control-label">角色名</label>
                             <div class="col-sm-10">
                                 <input type="text" name="roleName" lay-verify="required|check" placeholder="角色名"
-                                       autocomplete="off" class="layui-input" check-url="${ path }/sysRole/checkRole">
+                                       autocomplete="off" class="layui-input" check-url="${ path }/sysRole/checkRole" check-id="">
                             </div>
                         </div>
                         <div class="form-group">
@@ -68,50 +68,7 @@
 
 <%@ include file="/commons/importJs.jsp" %>
 <script>
-//    layui.use('form', function(){
-//        var form = layui.form;
-//
-//        //监听提交
-//        form.on('submit(*)', function(data){
-//            var index = layer.load(1);
-//            var values = data.field, fm = data.form;
-//            //获取checkbox选中的值
-//            var $ch = $("input:checkbox:checked");
-//            var name = {};
-//            var chvs = [];
-//            if($ch && $ch[0]){
-//                name = $ch[0].name;
-//                $ch.each(function() {
-//                    chvs.push($(this).val());
-//                });
-//                values[name] = chvs;
-//            }
-//            $.ajax({
-//                type: 'POST',
-//                url: $(fm).attr('action'),
-//                dataType: 'json',
-//                data: values,
-//                success: function (data) {
-//                    layer.close(index);
-//                    if (data.success) {
-//                        layer.alert(data.message, {
-//                            icon: 1,
-//                            title: '成功提示'
-//                        });
-//                        setTimeout(function(){
-//                            parent.location.reload();
-//                        },1000);
-//                    } else {
-//                        layer.alert(data.message, {
-//                            icon: 2,
-//                            title: '失败提示'
-//                        });
-//                    }
-//                }
-//            });
-//            return false;
-//        });
-//    });
+
 </script>
 </body>
 </html>

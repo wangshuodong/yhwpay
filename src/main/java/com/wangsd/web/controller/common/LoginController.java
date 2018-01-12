@@ -3,7 +3,6 @@ package com.wangsd.web.controller.common;
 import com.alibaba.fastjson.JSONObject;
 import com.google.code.kaptcha.servlet.KaptchaExtend;
 import com.wangsd.common.base.BaseController;
-import com.wangsd.common.scan.BusinessException;
 import com.wangsd.web.service.ISysLogService;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
@@ -37,22 +36,6 @@ public class LoginController extends BaseController {
             return "redirect:/index";
         }
         return "login";
-    }
-
-    @RequestMapping("/login2")
-    public String login2(Model model) throws Exception {
-        model.addAttribute("error", "sdg");
-        return "login";
-    }
-
-    @RequestMapping("/login3")
-    public String login3() throws Exception {
-        throw new BusinessException("业务执行异常");
-    }
-
-    @RequestMapping("/login4")
-    public String login4() throws Exception {
-        throw new RuntimeException("业务执行异常");
     }
 
     /**

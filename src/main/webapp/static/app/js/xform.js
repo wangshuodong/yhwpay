@@ -40,14 +40,15 @@ layui.define(['form', 'upload'], function (exports) {
         check: function (value, item) {
             var checkUrl = $(item).attr('check-url');
             var name = $(item).attr('name');
+            var id = $(item).attr('check-id');
             var _msg = "";
             if (checkUrl != '') {
                 $.ajax({
                     type: "post",
                     url: checkUrl,
-                    data: {name: value},
+                    data: {roleName: value, id: id},
                     dataType: 'json',
-                    async : false,
+                    async: false,
                     success: function (data) {
                         if (data.code == 500) {
                             if (data.msg) {

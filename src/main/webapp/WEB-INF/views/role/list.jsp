@@ -44,7 +44,7 @@
                             </div>
                             <div class="col-sm-6 col-lg-2">
                                 <button class="layui-btn" lay-submit lay-filter="search">查 询</button>
-                                <button class="layui-btn" lay-submit lay-filter="search"><i class="layui-icon layui-anim layui-anim-rotate layui-anim-loop" style="font-size: 30px;">&#x1002;</i></button>
+                                <a class="layui-btn" href="javascript:window.location.reload();"><i class="layui-icon layui-anim layui-anim-rotate layui-anim-loop" style="font-size: 30px;">&#x1002;</i></a>
                             </div>
                         </div>
                         <br>
@@ -83,6 +83,7 @@
 </script>
 
 <script type="text/html" id="barDemo">
+    <a href="javascript:;" class="layui-table-link" lay-event="edit" data-url="${ path }/sysRole/auth" data-title="角色授权">授权</a>
     <a href="javascript:;" class="layui-table-link" lay-event="edit" data-url="${ path }/sysRole/edit" data-title="修改角色">修改</a>
     <a href="javascript:;" class="layui-table-link" lay-event="del" data-url="${ path }/sysRole/deleteRole">删除</a>
 </script>

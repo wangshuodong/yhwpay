@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class IndexController {
 
     @RequestMapping({"","/","/index"})
-    /*@Log("访问首页")*/
     public  String index(Model model){
 		return "index";
     }  

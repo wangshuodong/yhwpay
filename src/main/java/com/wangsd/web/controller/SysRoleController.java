@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.plugins.Page;
 import com.wangsd.common.base.BaseController;
 import com.wangsd.common.entity.PageInfo;
 import com.wangsd.common.entity.Rest;
+import com.wangsd.common.scan.Log;
 import com.wangsd.web.model.SysRole;
 import com.wangsd.web.service.ISysRoleService;
 import org.apache.commons.lang3.StringUtils;
@@ -50,12 +51,15 @@ public class SysRoleController extends BaseController {
         return "role/edit";
     }
 
+    @RequestMapping("/auth")
+    public String auth(Model model){
+        return "role/auth";
+    }
+
     /**
-     * 新增角色
-     * @param sysRole
-     * @param model
-     * @return
+     * 新增
      */
+    @Log("新增角色")
     @RequestMapping("/insertRole")
     @ResponseBody
     public Object insertRole(SysRole sysRole, Model model){
@@ -90,9 +94,7 @@ public class SysRoleController extends BaseController {
     }
 
     /**
-     * 修改角色信息
-     * @param sysRole
-     * @return
+     * 修改
      */
     @RequestMapping(value = "/updateRole")
     @ResponseBody
@@ -103,9 +105,8 @@ public class SysRoleController extends BaseController {
 
     /**
      * 删除角色信息
-     * @param
-     * @return
      */
+    @Log("删除角色")
     @RequestMapping(value = "/deleteRole")
     @ResponseBody
     public Object deleteRole(Long id) {
@@ -118,9 +119,8 @@ public class SysRoleController extends BaseController {
 
     /**
      * 批量删除
-     * @param ids
-     * @return
      */
+    @Log("批量删除角色")
     @RequestMapping("/deleteAll")
     @ResponseBody
     public Rest deleteAll(Long[] ids){
@@ -130,18 +130,19 @@ public class SysRoleController extends BaseController {
 
     /**
      * 检查角色名是否存在
-     * @param
-     * @return
      */
     @RequestMapping(value = "/checkRole")
     @ResponseBody
-    public Object checkRole(String name) {
+    public Object checkRole(SysRole sysRole) {
         EntityWrapper<SysRole> ew = new EntityWrapper<SysRole>();
-        if(StringUtils.isNotBlank(name)){
-            ew.eq("roleName",name);
+        if(StringUtils.isNotBlank(sysRole.getRoleName())){
+            ew.eq("roleName",sysRole.getRoleName());
         }
-        SysRole sysRole = roleService.selectOne(ew);
-        if (sysRole != null) {
+        if (null != sysRole.getId()) {
+            ew.where("id != {0}", sysRole.getId());
+        }
+        SysRole role = roleService.selectOne(ew);
+        if (role != null) {
             return Rest.failure("角色名称重复");
         }
         return Rest.ok();
