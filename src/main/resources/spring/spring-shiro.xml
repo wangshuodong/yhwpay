@@ -33,7 +33,7 @@
     <bean id="sessionIdCookie" class="org.apache.shiro.web.servlet.SimpleCookie">
         <constructor-arg value="sid"/>
         <property name="httpOnly" value="true"/>
-        <property name="maxAge" value="#{30 * 60 * 1000}"/>
+        <property name="maxAge" value="#{60 * 1000}"/>
     </bean>
 
     <bean id="rememberMeCookie" class="org.apache.shiro.web.servlet.SimpleCookie">
@@ -52,6 +52,9 @@
         <property name="cookie" ref="rememberMeCookie"/>
     </bean>
 
+    <!-- ajax session超时时处理 -->
+    <bean id="ajaxSessionFilter" class="com.wangsd.common.shiro.ShiroAjaxSessionFilter"/>
+
     <!-- 会话DAO -->
     <bean id="sessionDAO" class="org.apache.shiro.session.mgt.eis.EnterpriseCacheSessionDAO">
         <property name="activeSessionsCacheName" value="shiro-activeSessionCache"/>
@@ -61,7 +64,7 @@
     <!-- 会话管理器 -->
     <bean id="sessionManager" class="org.apache.shiro.web.session.mgt.DefaultWebSessionManager">
         <!-- 设置全局会话超时时间 半小时 -->
-        <property name="globalSessionTimeout" value="#{30 * 60 * 1000}"/>
+        <property name="globalSessionTimeout" value="#{60 * 1000}"/>
         <!-- url上带sessionId 默认为true -->
         <property name="sessionIdUrlRewritingEnabled" value="false"/>
         <property name="deleteInvalidSessions" value="true"/>
@@ -74,9 +77,9 @@
     <!-- 安全管理器 -->
     <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
         <property name="realm" ref="shiroDbRealm"/>
-        <property name="sessionManager" ref="sessionManager"/>
+        <!--<property name="rememberMeManager" ref="rememberMeManager"/>-->
         <property name="cacheManager" ref="shiroEacheManager"/>
-        <property name="rememberMeManager" ref="rememberMeManager"/>
+        <property name="sessionManager" ref="sessionManager"/>
     </bean>
 
     <!-- 相当于调用SecurityUtils.setSecurityManager(securityManager) -->
@@ -94,18 +97,16 @@
         <!-- 登陆成功后跳转的url -->
         <property name="successUrl" value="/index"/>
         <!-- 没有权限跳转的url -->
-        <property name="unauthorizedUrl" value="/unauthorized.jsp"/>
+        <property name="unauthorizedUrl" value="/unauth"/>
         <property name="filters">
-            <map>
+            <!--<map>
                 <entry key="authc">
                     <bean class="org.apache.shiro.web.filter.authc.PassThruAuthenticationFilter"/>
                 </entry>
+            </map>-->
+            <map>
+              <entry key="user" value-ref="ajaxSessionFilter"/>
             </map>
-            <!--
-            <util:map>
-              <entry key="authc" value-ref="formAuthenticationFilter"/>
-            </util:map>
-            -->
         </property>
         <property name="filterChainDefinitions">
             <value>
@@ -114,7 +115,7 @@
                 /logout = anon
                 /captcha = anon
                 /static/** = anon
-                /** = authc
+                /** = user
             </value>
         </property>
     </bean>

@@ -27,7 +27,7 @@ public class ISysMenuServiceTest extends BaseTest {
 
     @Test
     public void selectAllTreeMenu() throws Exception {
-        List<TreeMenu> list = menuService.selectAllTreeMenu(null);
+        List<TreeMenu> list = menuService.selectAllTreeMenuByUserId(null);
         System.out.println(JSONObject.toJSON(list));
     }
 
