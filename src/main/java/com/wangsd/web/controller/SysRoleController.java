@@ -65,7 +65,7 @@ public class SysRoleController extends BaseController {
             userId = loginUser.getId();
         }
         List<TreeMenu> list = menuService.selectAllTreeMenuByUserId(userId);
-        model.addAttribute("TreeMenu", list);
+        model.addAttribute("treeMenu", list);
         return "role/auth";
     }
 

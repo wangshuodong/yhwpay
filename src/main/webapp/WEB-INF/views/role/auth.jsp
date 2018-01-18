@@ -17,23 +17,17 @@
     <form class="form-horizontal layui-form" action="${ path }/sysRole/insertRole">
         <div class="layui-collapse">
             <div class="layui-colla-item">
-                <h2 class="layui-colla-title">系统设置</h2>
-                <div class="layui-colla-content layui-show">
-                    <input type="checkbox" name="" title="角色管理" lay-skin="primary">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <input type="checkbox" name="" title="添加角色" lay-skin="primary">
-                    <input type="checkbox" name="" title="批量删除" lay-skin="primary">
-                    <input type="checkbox" name="" title="授权" lay-skin="primary">
-                    <input type="checkbox" name="" title="修改" lay-skin="primary">
-                    <input type="checkbox" name="" title="删除" lay-skin="primary">
-                </div>
-            </div>
-            <div class="layui-colla-item">
-                <h2 class="layui-colla-title">李清照</h2>
-                <div class="layui-colla-content layui-show">内容区域</div>
-            </div>
-            <div class="layui-colla-item">
-                <h2 class="layui-colla-title">鲁迅</h2>
-                <div class="layui-colla-content layui-show">内容区域</div>
+                <c:forEach items="${treeMenu}" var="item">
+                    <h2 class="layui-colla-title">${item.menuName}</h2>
+                    <c:forEach items="${item.children}" var="two">
+                    <div class="layui-colla-content layui-show">
+                        <input type="checkbox" name="" title="${two.menuName}" lay-skin="primary">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <c:forEach items="${two.children}" var="three">
+                            <input type="checkbox" name="" title="${three.menuName}" lay-skin="primary">
+                        </c:forEach>
+                    </div>
+                    </c:forEach>
+                </c:forEach>
             </div>
         </div>
     </form>

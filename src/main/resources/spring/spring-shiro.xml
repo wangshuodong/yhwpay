@@ -33,7 +33,7 @@
     <bean id="sessionIdCookie" class="org.apache.shiro.web.servlet.SimpleCookie">
         <constructor-arg value="sid"/>
         <property name="httpOnly" value="true"/>
-        <property name="maxAge" value="#{60 * 1000}"/>
+        <property name="maxAge" value="#{30 * 60 * 1000}"/>
     </bean>
 
     <bean id="rememberMeCookie" class="org.apache.shiro.web.servlet.SimpleCookie">
@@ -64,7 +64,7 @@
     <!-- 会话管理器 -->
     <bean id="sessionManager" class="org.apache.shiro.web.session.mgt.DefaultWebSessionManager">
         <!-- 设置全局会话超时时间 半小时 -->
-        <property name="globalSessionTimeout" value="#{60 * 1000}"/>
+        <property name="globalSessionTimeout" value="#{30 * 60 * 1000}"/>
         <!-- url上带sessionId 默认为true -->
         <property name="sessionIdUrlRewritingEnabled" value="false"/>
         <property name="deleteInvalidSessions" value="true"/>
