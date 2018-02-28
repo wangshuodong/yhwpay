@@ -38,6 +38,11 @@ public class LoginController extends BaseController {
         return "login";
     }
 
+    @RequestMapping("/login1")
+    public String login1(Model model){
+        return "login1";
+    }
+
     /**
      * 执行登录
      */
